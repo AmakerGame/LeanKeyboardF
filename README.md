@@ -1,6 +1,4 @@
-# LeanKeyboardF
-
-![Logo of LeanKeyboard](img/leankeykeyboard_logo_small.png "Logo of LeanKeyboardF")
+![Logo of LeanKeyboard](img/leankeykeyboard_logo_small.png "Logo of LeanKeyboard") LeanKeyboardF
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](./LICENSE)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/AmakerGame/LeanKeyboardF?style=flat-square)](https://github.com/AmakerGame/LeanKeyboardF/releases)
