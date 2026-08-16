@@ -42,9 +42,6 @@ LeanKeyboardF aims to extend the original project with additional tools for keyb
 
 ### Added features
 
-*Currently none listed. New tools and improvements are planned.*
-
-Related issues:
 - Keyboard size: https://github.com/yuliskov/LeanKeyboard/issues/73
 - Floating keyboard: https://github.com/yuliskov/LeanKeyboard/issues/47
 
