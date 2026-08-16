@@ -1,4 +1,4 @@
-![Logo of LeanKeyboard](img/leankeykeyboard_logo_small.png "Logo of LeanKeyboard") LeanKeyboardF
+![Logo of LeanKeyboardF](img/leankeykeyboard_logo_small.png "Logo of LeanKeyboardF") LeanKeyboardF
 =========
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](./LICENSE)
@@ -18,6 +18,7 @@ LeanKeyboardF aims to extend the original project with additional tools for keyb
 
 - **Author / Maintainer**: [AmakerGame](https://github.com/AmakerGame) (Edytor-Studio Core)
 - **Base project**: [yuliskov/LeanKeyboard](https://github.com/yuliskov/LeanKeyboard)
+- **This project**: [AmakerGame/LeanKeyboardF](https://github.com/AmakerGame/LeanKeyboardF/tree/master)
 
 ---
 
@@ -42,6 +43,10 @@ LeanKeyboardF aims to extend the original project with additional tools for keyb
 ### Added features
 
 *Currently none listed. New tools and improvements are planned.*
+
+Related issues:
+- Keyboard size: https://github.com/yuliskov/LeanKeyboard/issues/73
+- Floating keyboard: https://github.com/yuliskov/LeanKeyboard/issues/47
 
 ---
 

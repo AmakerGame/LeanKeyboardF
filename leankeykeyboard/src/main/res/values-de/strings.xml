@@ -43,4 +43,19 @@
     <string name="enable_suggestions_desc">Vorschlagszeile aktivieren</string>
     <string name="show_launcher_icon">Icon anzeigen</string>
     <string name="show_launcher_icon_desc">Icon im Launcher anzeigen</string>
+    <string name="about_original">Originalprogramm</string>
+    <string name="about_this_program">Dieses Programm</string>
+    <string name="settings">Einstellungen</string>
+    <string name="settings_desc">Zusätzliche Einstellungen</string>
+    <string name="physical_keyboard_mode">Physischer Tastaturmodus</string>
+    <string name="physical_keyboard_mode_desc">Unterstützung für physische Tastatur hinzufügen (Alt+Shift und Enter)</string>
+    <string name="keyboard_size">Größe</string>
+    <string name="keyboard_size_desc">Aktuelle Größe: %1$s. Tastatur vergrößern oder verkleinern</string>
+    <string name="increase_size">Vergrößern</string>
+    <string name="decrease_size">Verkleinern</string>
+    <string name="floating_keyboard">Schwebende Tastatur</string>
+    <string name="floating_keyboard_desc">Schwebenden (beweglichen) Tastaturmodus aktivieren</string>
+    <string name="size_normal">Normal</string>
+    <string name="size_large">Groß</string>
+    <string name="size_xlarge">Sehr groß</string>
 </resources>

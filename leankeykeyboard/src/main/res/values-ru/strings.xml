@@ -50,4 +50,19 @@
     <string name="show_launcher_icon_desc">Отображать приложение на домашнем экране</string>
     <string name="enable_cyclic_navigation">Циклическая навигация</string>
     <string name="enable_cyclic_navigation_desc">Циклическая навигация по клавиатуре</string>
+    <string name="about_original">Оригинальная программа</string>
+    <string name="about_this_program">Эта программа</string>
+    <string name="settings">Настройки</string>
+    <string name="settings_desc">Дополнительные настройки</string>
+    <string name="physical_keyboard_mode">Режим физической клавиатуры</string>
+    <string name="physical_keyboard_mode_desc">Добавить поддержку физической клавиатуры (Alt+Shift и Enter)</string>
+    <string name="keyboard_size">Размер</string>
+    <string name="keyboard_size_desc">Текущий размер: %1$s. Увеличить или уменьшить клавиатуру</string>
+    <string name="increase_size">Увеличить</string>
+    <string name="decrease_size">Уменьшить</string>
+    <string name="floating_keyboard">Плавающая клавиатура</string>
+    <string name="floating_keyboard_desc">Включить плавающий (перемещаемый) режим клавиатуры</string>
+    <string name="size_normal">Обычный</string>
+    <string name="size_large">Большой</string>
+    <string name="size_xlarge">Очень большой</string>
 </resources>

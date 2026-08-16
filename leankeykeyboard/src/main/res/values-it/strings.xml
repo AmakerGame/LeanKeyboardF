@@ -59,4 +59,19 @@
     <string name="enable_cyclic_navigation">Navigazione ciclica</string>
     <string name="enable_cyclic_navigation_desc">Navigazione ciclica tramite tastiera</string>
     <!--  END: autotranslated strings  -->
+    <string name="about_original">Programma originale</string>
+    <string name="about_this_program">Questo programma</string>
+    <string name="settings">Impostazioni</string>
+    <string name="settings_desc">Impostazioni aggiuntive</string>
+    <string name="physical_keyboard_mode">Modalità tastiera fisica</string>
+    <string name="physical_keyboard_mode_desc">Aggiungi supporto per tastiera fisica (Alt+Shift e Invio)</string>
+    <string name="keyboard_size">Dimensione</string>
+    <string name="keyboard_size_desc">Dimensione attuale: %1$s. Aumenta o diminuisci la tastiera</string>
+    <string name="increase_size">Aumenta</string>
+    <string name="decrease_size">Diminuisci</string>
+    <string name="floating_keyboard">Tastiera mobile</string>
+    <string name="floating_keyboard_desc">Abilita modalità tastiera mobile (fluttuante)</string>
+    <string name="size_normal">Normale</string>
+    <string name="size_large">Grande</string>
+    <string name="size_xlarge">Molto grande</string>
 </resources>

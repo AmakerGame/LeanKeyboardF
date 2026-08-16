@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="com.liskovsoft.leankeykeyboard">
+          package="com.EdS.LeanKeyboardF">
 
     <!-- Use older sdk -->
     <uses-sdk tools:overrideLibrary="
@@ -37,7 +37,7 @@
             android:value="oem_1p_app" />
 
         <activity
-            android:name="com.liskovsoft.leankeyboard.activity.settings.KbSettingsActivity2"
+            android:name="com.EdS.LeanKeyboardF.activity.settings.KbSettingsActivity2"
             android:launchMode="singleTop"
             android:exported="true">
             <intent-filter>
@@ -49,24 +49,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.liskovsoft.leankeyboard.activity.settings.KbSettingsActivity"
+            android:name="com.EdS.LeanKeyboardF.activity.settings.KbSettingsActivity"
             android:launchMode="singleTop">
         </activity>
         <activity
-            android:name="com.liskovsoft.leankeyboard.activity.settings.KbLayoutActivity"
+            android:name="com.EdS.LeanKeyboardF.activity.settings.KbLayoutActivity"
             android:launchMode="singleTop">
         </activity>
         <activity
-            android:name="com.liskovsoft.leankeyboard.activity.PermissionsActivity"
+            android:name="com.EdS.LeanKeyboardF.activity.PermissionsActivity"
             android:launchMode="singleTop">
         </activity>
         <activity
-            android:name="com.liskovsoft.leankeyboard.addons.voice.RecognizerIntentActivity"
+            android:name="com.EdS.LeanKeyboardF.addons.voice.RecognizerIntentActivity"
             android:theme="@style/Theme.AppCompat"
             android:launchMode="singleTop"/>
 
         <activity
-            android:name="com.liskovsoft.leankeyboard.activity.settings.KbActivationActivity"
+            android:name="com.EdS.LeanKeyboardF.activity.settings.KbActivationActivity"
             android:launchMode="singleTop">
             <meta-data
                 android:name="package"
@@ -88,7 +88,7 @@
         </activity>
 
         <service
-            android:name="com.liskovsoft.leankeyboard.ime.LeanbackImeService"
+            android:name="com.EdS.LeanKeyboardF.ime.LeanbackImeService"
             android:label="@string/ime_service_name"
             android:permission="android.permission.BIND_INPUT_METHOD"
             android:exported="true">
@@ -102,7 +102,7 @@
         </service>
 
         <receiver
-            android:name="com.liskovsoft.leankeyboard.receiver.RestartServiceReceiver"
+            android:name="com.EdS.LeanKeyboardF.receiver.RestartServiceReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -115,7 +115,7 @@
         </receiver>
 
         <receiver
-            android:name="com.liskovsoft.leankeyboard.receiver.TextUpdateReceiver"
+            android:name="com.EdS.LeanKeyboardF.receiver.TextUpdateReceiver"
             android:permission="com.amazon.tv.ime.permission.KEYBOARD_STATE"
             android:enabled="true"
             android:exported="true">

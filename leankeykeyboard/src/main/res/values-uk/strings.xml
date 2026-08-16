@@ -50,4 +50,19 @@
     <string name="show_launcher_icon_desc">Відображати іконку лаунчера</string>
     <string name="enable_cyclic_navigation">Циклічна навігація</string>
     <string name="enable_cyclic_navigation_desc">Циклічна навігація по клавіатурі</string>
+    <string name="about_original">Оригінальна програма</string>
+    <string name="about_this_program">Ця програма</string>
+    <string name="settings">Налаштування</string>
+    <string name="settings_desc">Додаткові налаштування</string>
+    <string name="physical_keyboard_mode">Режим фізичної клавіатури</string>
+    <string name="physical_keyboard_mode_desc">Додати підтримку фізичної клавіатури (Alt+Shift і Enter)</string>
+    <string name="keyboard_size">Розмір</string>
+    <string name="keyboard_size_desc">Поточний розмір: %1$s. Збільшити або зменшити клавіатуру</string>
+    <string name="increase_size">Збільшити</string>
+    <string name="decrease_size">Зменшити</string>
+    <string name="floating_keyboard">Плаваюча клавіатура</string>
+    <string name="floating_keyboard_desc">Увімкнути плаваючий (переміщуваний) режим клавіатури</string>
+    <string name="size_normal">Звичайний</string>
+    <string name="size_large">Великий</string>
+    <string name="size_xlarge">Дуже великий</string>
 </resources>

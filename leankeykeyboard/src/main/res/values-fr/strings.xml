@@ -59,4 +59,19 @@
     <string name="enable_cyclic_navigation">Navigation cyclique</string>
     <string name="enable_cyclic_navigation_desc">Navigation cyclique via le clavier</string>
     <!--  END: autotranslated strings  -->
+    <string name="about_original">Programme original</string>
+    <string name="about_this_program">Ce programme</string>
+    <string name="settings">Paramètres</string>
+    <string name="settings_desc">Paramètres supplémentaires</string>
+    <string name="physical_keyboard_mode">Mode clavier physique</string>
+    <string name="physical_keyboard_mode_desc">Ajouter la prise en charge du clavier physique (Alt+Shift et Entrée)</string>
+    <string name="keyboard_size">Taille</string>
+    <string name="keyboard_size_desc">Taille actuelle : %1$s. Augmenter ou diminuer la taille du clavier</string>
+    <string name="increase_size">Augmenter</string>
+    <string name="decrease_size">Diminuer</string>
+    <string name="floating_keyboard">Clavier flottant</string>
+    <string name="floating_keyboard_desc">Activer le mode clavier flottant (déplaçable)</string>
+    <string name="size_normal">Normal</string>
+    <string name="size_large">Grand</string>
+    <string name="size_xlarge">Très grand</string>
 </resources>

@@ -20,4 +20,19 @@
     <string name="keyboardview_keycode_right">‏‮Right‬‏</string>
     <string name="keyboard_headset_required_to_hear_password">‏‮Plug‬‏ ‏‮in‬‏ ‏‮a‬‏ ‏‮headset‬‏ ‏‮to‬‏ ‏‮hear‬‏ ‏‮password‬‏ ‏‮keys‬‏ ‏‮spoken.‬‏</string>
     <string name="keyboard_password_character_no_headset">‏‮Dot.‬‏</string>
+    <string name="about_original">Original program</string>
+    <string name="about_this_program">This program</string>
+    <string name="settings">Settings</string>
+    <string name="settings_desc">Additional settings</string>
+    <string name="physical_keyboard_mode">Physical keyboard mode</string>
+    <string name="physical_keyboard_mode_desc">Add support for physical keyboard (Alt+Shift and Enter)</string>
+    <string name="keyboard_size">Keyboard size</string>
+    <string name="keyboard_size_desc">Current size: %1$s. Increase or decrease keyboard size</string>
+    <string name="increase_size">Increase</string>
+    <string name="decrease_size">Decrease</string>
+    <string name="floating_keyboard">Floating keyboard</string>
+    <string name="floating_keyboard_desc">Enable floating (movable) keyboard mode</string>
+    <string name="size_normal">Normal</string>
+    <string name="size_large">Large</string>
+    <string name="size_xlarge">Extra large</string>
 </resources>

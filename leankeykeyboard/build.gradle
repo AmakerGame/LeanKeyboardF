@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     // Latest gradle fix: https://stackoverflow.com/questions/76300671/android-getting-error-namespace-not-specified
-    namespace 'com.liskovsoft.leankeykeyboard'
+    namespace 'com.EdS.LeanKeyboardF'
 
     // Latest gradle fix: https://stackoverflow.com/questions/22604627/gradle-buildconfigfield-buildconfig-cannot-resolve-symbol
     buildFeatures {
@@ -19,7 +19,7 @@ android {
     buildToolsVersion project.properties.buildToolsVersion
 
     defaultConfig {
-        applicationId "org.liskovsoft.leankeykeyboard.pro"
+        applicationId "com.EdS.LeanKeyboardF"
         minSdkVersion project.properties.minSdkVersion
         targetSdkVersion project.properties.targetSdkVersion
         versionCode 205
@@ -40,7 +40,7 @@ android {
     // https://stackoverflow.com/questions/18332474/how-to-set-versionname-in-apk-filename-using-gradle
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
-            def project = "LeanKeyboard"
+            def project = "LeanKeyboardF"
             // Latest gradle fix: https://stackoverflow.com/questions/62075122/no-such-property-variantconfiguration-for-class
             def buildType = variant.buildType.name.take(1)
             def version = variant.versionName
@@ -64,10 +64,10 @@ android {
 
     productFlavors {
         playstore {
-            applicationId "org.liskovsoft.androidtv.rukeyboard"
+            applicationId "com.EdS.LeanKeyboardF"
         }
         origin {
-            applicationId "com.liskovsoft.leankeyboard"
+            applicationId "com.EdS.LeanKeyboardF"
         }
     }
 }
