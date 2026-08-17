@@ -22,6 +22,10 @@
     <!-- Keyboard other -->
     <dimen name="keyboard_top_spacing">6.0dip</dimen>
     <dimen name="keyboard_bottom_spacing">28.0dip</dimen>
+    <!-- Floating keyboard mode (Misc settings) -->
+    <dimen name="floating_keyboard_corner_radius">14.0dip</dimen>
+    <dimen name="floating_keyboard_horizontal_padding">18.0dip</dimen>
+    <dimen name="floating_keyboard_top_padding">10.0dip</dimen>
     <!-- Voice input -->
     <dimen name="action_button_size">64.0dip</dimen>
     <dimen name="recognizer_size">96.0dip</dimen>

@@ -191,7 +191,11 @@ public class LeanbackKeyboardContainer {
         mAlphaIn = res.getFraction(R.fraction.alpha_in, 1, 1);
         mAlphaOut = res.getFraction(R.fraction.alpha_out, 1, 1);
         mVoiceAnimator = new LeanbackKeyboardContainer.VoiceIntroAnimator(mVoiceEnterListener, mVoiceExitListener);
-        mRootView = (RelativeLayout) mContext.getLayoutInflater().inflate(R.layout.root_leanback, null);
+        // "Floating keyboard" (Misc settings): a compact panel that hugs its
+        // content instead of stretching the full screen width.
+        final boolean isFloating = LeanKeyPreferences.instance(mContext).isFloatingKeyboard();
+        final int rootLayoutRes = isFloating ? R.layout.root_leanback_floating : R.layout.root_leanback;
+        mRootView = (RelativeLayout) mContext.getLayoutInflater().inflate(rootLayoutRes, null);
         mKeyboardsContainer = mRootView.findViewById(R.id.keyboard);
         mSuggestionsBg = mRootView.findViewById(R.id.candidate_background);
         mSuggestionsContainer = (HorizontalScrollView) mRootView.findViewById(R.id.suggestions_container);

@@ -1,0 +1,3 @@
+*.jks -text -diff binary
+*.keystore -text -diff binary
+keystore/keystore.properties -text

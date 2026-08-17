@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Compact rounded background used only when "Floating keyboard" is
+     enabled in Misc settings, so the keyboard looks like a small
+     floating panel instead of a full-width bar. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/keyboard_background" />
+    <corners android:radius="@dimen/floating_keyboard_corner_radius" />
+</shape>

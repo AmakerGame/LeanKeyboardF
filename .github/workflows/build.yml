@@ -1,0 +1,86 @@
+name: Build APKs
+
+# Run manually from the "Actions" tab: pick a version, optionally pick
+# which flavors to build.
+#
+# Signing key lives directly in this repo, in keystore/:
+#  - First run: keystore/release.keystore.jks doesn't exist yet, so
+#    build.sh generates it. At the end of the job this workflow commits
+#    keystore/ straight back to the repo.
+#  - Every run after that: keystore/ is already checked out from git,
+#    build.sh sees the file exists and reuses it - same signing key
+#    every time. versionCode auto-increments and gets committed back too.
+#
+# !! SECURITY WARNING !!
+# keystore/keystore.properties contains the plaintext store/key
+# passwords. Committing it means anyone with read access to this repo
+# (and its full git history - deleting it later does NOT remove it from
+# past commits) can extract your private signing key and sign their own
+# updates as if they were you. Only do this on a PRIVATE repository you
+# fully trust. For a public repo, use encrypted repo secrets + a keystore
+# cached outside git instead.
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "App version (versionName), e.g. 6.2.0"
+        required: true
+      flavors:
+        description: "Comma-separated flavors to build"
+        required: false
+        default: "playstore,origin"
+
+permissions:
+  contents: write # needed to commit the keystore/versionCode back to the repo
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ hashFiles('**/*.gradle*', 'gradle/wrapper/gradle-wrapper.properties') }}
+          restore-keys: |
+            gradle-
+
+      - name: Make scripts executable
+        run: chmod +x gradlew build.sh
+
+      - name: Build (${{ github.event.inputs.version }})
+        run: ./build.sh "${{ github.event.inputs.version }}" "${{ github.event.inputs.flavors }}"
+
+      - name: Upload APKs
+        uses: actions/upload-artifact@v4
+        with:
+          name: LeanKeyboardF-v${{ github.event.inputs.version }}
+          path: releases/${{ github.event.inputs.version }}/*.apk
+          if-no-files-found: error
+
+      # Persists a newly-generated keystore (first run) and the
+      # auto-incremented versionCode (every run) back into the repo.
+      - name: Commit keystore / versionCode changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f keystore/
+          if git diff --cached --quiet; then
+            echo "Nothing to commit."
+          else
+            git commit -m "chore: update release keystore/versionCode [skip ci]"
+            git push
+          fi
+

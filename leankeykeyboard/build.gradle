@@ -1,5 +1,18 @@
 apply plugin: 'com.android.application'
 
+// --- Release signing key -------------------------------------------------
+// Loaded from <rootProject>/keystore/keystore.properties, which is
+// created automatically (together with the .jks keystore itself) by
+// build.bat / build.sh on their very first run. Once created, both files
+// stay put and every following build just reuses them, so the app is
+// always signed with the same key. Never commit the keystore/ folder.
+def keystorePropertiesFile = rootProject.file("keystore/keystore.properties")
+def keystoreProperties = new Properties()
+def keystoreAvailable = keystorePropertiesFile.exists()
+if (keystoreAvailable) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 android {
     // Latest gradle fix: https://stackoverflow.com/questions/76300671/android-getting-error-namespace-not-specified
     namespace 'com.EdS.LeanKeyboardF'
@@ -22,21 +35,52 @@ android {
         applicationId "com.EdS.LeanKeyboardF"
         minSdkVersion project.properties.minSdkVersion
         targetSdkVersion project.properties.targetSdkVersion
-        versionCode 205
-        versionName "6.1.35"
+        // Pass version at build time: gradlew assembleRelease -PappVersionName=6.2.0 -PappVersionCode=210
+        // build.bat / build.sh set these for you from the version you give on the command line.
+        versionCode project.hasProperty('appVersionCode') ? (project.property('appVersionCode') as Integer) : 205
+        versionName project.hasProperty('appVersionName') ? project.property('appVersionName') as String : "6.1.35"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
+
+    signingConfigs {
+        release {
+            if (keystoreAvailable) {
+                storeFile rootProject.file("keystore/" + keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+            }
+        }
+    }
+
     buildTypes {
         release {
             // https://medium.com/@angelhiadefiesta/how-to-obfuscate-in-android-with-proguard-acab47701577
             minifyEnabled true // enable obfuscation
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // Falls back to the debug/no signing config if the keystore hasn't been
+            // generated yet, so the very first `assembleRelease` (before build.bat/
+            // build.sh has run) doesn't hard-fail the whole build.
+            if (keystoreAvailable) {
+                signingConfig signingConfigs.release
+            }
         }
     }
 
-    // naming example: SmartYouTubeTV_Xwalk_v6.8.12_r.apk
+    // Produces one "universal" APK (all ABIs, works everywhere) plus one
+    // slimmer APK per CPU architecture, for every flavor/buildType.
+    splits {
+        abi {
+            enable true
+            reset()
+            include "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+            universalApk true
+        }
+    }
+
+    // naming example: LeanKeyboardF_v6.8.12_origin_r_universal.apk
     // https://stackoverflow.com/questions/18332474/how-to-set-versionname-in-apk-filename-using-gradle
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
@@ -45,8 +89,10 @@ android {
             def buildType = variant.buildType.name.take(1)
             def version = variant.versionName
             def flavor = variant.productFlavors[-1].name
+            def abi = output.getFilter(com.android.build.OutputFile.ABI)
+            def abiSuffix = abi != null ? "_${abi}" : "_universal"
 
-            def newApkName = sprintf("%s_v%s_%s_%s.apk", [project, version, flavor, buildType])
+            def newApkName = sprintf("%s_v%s_%s_%s%s.apk", [project, version, flavor, buildType, abiSuffix])
 
             output.outputFileName = new File(newApkName)
         }
