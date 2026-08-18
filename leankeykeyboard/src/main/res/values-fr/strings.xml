@@ -39,6 +39,8 @@
     <string name="keep_on_screen_desc">Gardez-le à l\'écran lorsque le clavier physique est actif</string>
     <string name="misc">Divers</string>
     <string name="misc_desc">Paramètres divers</string>
+    <string name="keyboard_settings">Clavier</string>
+    <string name="keyboard_settings_desc">Paramètres du clavier</string>
     <string name="keep_on_screen">Gardez à l\'écran</string>
     <string name="keyboardview_keycode_clipboard">Presse-papiers</string>
     <string name="increase_kbd_size">Agrandir le clavier</string>

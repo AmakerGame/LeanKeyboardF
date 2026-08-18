@@ -39,6 +39,8 @@
     <string name="keep_on_screen_desc">Дръжте го на екрана, докато физическата клавиатура е активна</string>
     <string name="misc">Разни</string>
     <string name="misc_desc">Разни настройки</string>
+    <string name="keyboard_settings">Клавиатура</string>
+    <string name="keyboard_settings_desc">Настройки на клавиатурата</string>
     <string name="keep_on_screen">Дръжте на екрана</string>
     <string name="keyboardview_keycode_clipboard">клипборда</string>
     <string name="increase_kbd_size">Уголемяване на клавиатурата</string>

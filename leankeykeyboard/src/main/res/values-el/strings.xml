@@ -39,6 +39,8 @@
     <string name="keep_on_screen_desc">Διατηρήστε το στην οθόνη ενώ το φυσικό πληκτρολόγιο είναι ενεργό</string>
     <string name="misc">Διάφορα</string>
     <string name="misc_desc">Διάφορες ρυθμίσεις</string>
+    <string name="keyboard_settings">Πληκτρολόγιο</string>
+    <string name="keyboard_settings_desc">Ρυθμίσεις πληκτρολογίου</string>
     <string name="keep_on_screen">Κρατήστε στην οθόνη</string>
     <string name="keyboardview_keycode_clipboard">Πρόχειρο</string>
     <string name="increase_kbd_size">Μεγέθυνση πληκτρολογίου</string>

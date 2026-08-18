@@ -41,6 +41,8 @@
     <string name="keep_on_screen_desc">در حالی که صفحه کلید فیزیکی فعال است ، آن را روی صفحه نگه دارید</string>
     <string name="misc">متفرقه</string>
     <string name="misc_desc">تنظیمات متفرقه</string>
+    <string name="keyboard_settings">صفحه‌کلید</string>
+    <string name="keyboard_settings_desc">تنظیمات صفحه‌کلید</string>
     <string name="keep_on_screen">روی صفحه نگه دارید</string>
     <string name="keyboardview_keycode_clipboard">کلیپ بورد</string>
     <string name="increase_kbd_size">صفحه کلید را بزرگ کنید</string>

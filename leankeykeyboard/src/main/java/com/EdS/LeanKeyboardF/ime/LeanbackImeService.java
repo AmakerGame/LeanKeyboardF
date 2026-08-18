@@ -13,6 +13,8 @@ import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.CompletionInfo;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
@@ -37,6 +39,7 @@ public class LeanbackImeService extends KeyMapperImeService {
     private LeanbackSuggestionsFactory mSuggestionsFactory;
     public static final String COMMAND_RESTART = "restart";
     private boolean mForceShowKbd;
+    private boolean mLastFloatingState;
 
     @SuppressLint("HandlerLeak")
     private final Handler mHandler = new Handler() {
@@ -304,6 +307,29 @@ public class LeanbackImeService extends KeyMapperImeService {
         mKeyboardController.setHideWhenPhysicalKeyboardUsed(!mForceShowKbd);
         mEnterSpaceBeforeCommitting = false;
         mSuggestionsFactory = new LeanbackSuggestionsFactory(this, MAX_SUGGESTIONS);
+        mLastFloatingState = LeanKeyPreferences.instance(this).isFloatingKeyboard();
+    }
+
+    @Override
+    public void onConfigureWindow(Window win, boolean isFullscreen, boolean isCandidatesOnly) {
+        super.onConfigureWindow(win, isFullscreen, isCandidatesOnly);
+
+        // Setting our root view's own LayoutParams (see
+        // LeanbackKeyboardContainer) controls how it's placed *inside*
+        // the system's input frame, but the actual on-screen window
+        // surface itself (its width/gravity as WindowManager sees it) is
+        // a separate, higher-level setting - this is the documented hook
+        // for it (InputMethodService#onConfigureWindow). Without this,
+        // the window keeps spanning the full screen width no matter what
+        // our inner view's LayoutParams say.
+        boolean isFloating = LeanKeyPreferences.instance(this).isFloatingKeyboard();
+        if (isFloating) {
+            win.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            win.setGravity(android.view.Gravity.BOTTOM | android.view.Gravity.CENTER_HORIZONTAL);
+        } else {
+            win.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            win.setGravity(android.view.Gravity.BOTTOM);
+        }
     }
 
     @Override
@@ -375,6 +401,20 @@ public class LeanbackImeService extends KeyMapperImeService {
     @Override
     public void onStartInputView(EditorInfo info, boolean restarting) {
         super.onStartInputView(info, restarting);
+
+        // "Floating keyboard" (Misc settings) is only read once, when the
+        // controller/root view are built in onInitializeInterface() -
+        // which Android normally calls again only on a config change
+        // (e.g. screen rotation), not every time the keyboard is shown.
+        // Toggling the setting while this service's process is still
+        // alive would otherwise have no visible effect until the app is
+        // restarted. Check on every show and rebuild if it changed.
+        boolean currentFloatingState = LeanKeyPreferences.instance(this).isFloatingKeyboard();
+        if (currentFloatingState != mLastFloatingState) {
+            onInitializeInterface();
+            mInputView = mKeyboardController.getView();
+            setInputView(mInputView);
+        }
 
         mKeyboardController.onStartInputView();
         sendBroadcast(new Intent(IME_OPEN));

@@ -33,6 +33,8 @@
     <string name="keep_on_screen_desc">Не скрывать при использ. физ. клавиатур и нек. пультов</string>
     <string name="misc">Разное</string>
     <string name="misc_desc">Разные настройки</string>
+    <string name="keyboard_settings">Клавиатура</string>
+    <string name="keyboard_settings_desc">Настройки клавиатуры</string>
     <string name="increase_kbd_size">Увеличить</string>
     <string name="increase_kbd_size_desc">Увеличить клавиатуру</string>
     <string name="kbd_activation_error2">Произошла ошибка. Попробуйте активировать %s командами ниже.\n\n%s\n\n%s</string>

@@ -39,6 +39,8 @@
     <string name="keep_on_screen_desc">Geymdu það á skjánum þegar líkamlega lyklaborðið er virkt</string>
     <string name="misc">Ýmislegt</string>
     <string name="misc_desc">Ýmsar stillingar</string>
+    <string name="keyboard_settings">Lyklaborð</string>
+    <string name="keyboard_settings_desc">Lyklaborðsstillingar</string>
     <string name="keep_on_screen">Haltu áfram á skjánum</string>
     <string name="keyboardview_keycode_clipboard">Klemmuspjald</string>
     <string name="increase_kbd_size">Stækka lyklaborðið</string>

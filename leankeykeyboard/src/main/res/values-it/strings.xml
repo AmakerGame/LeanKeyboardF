@@ -39,6 +39,8 @@
     <string name="keep_on_screen_desc">Tienilo sullo schermo mentre la tastiera fisica è attiva</string>
     <string name="misc">Varie</string>
     <string name="misc_desc">Impostazioni varie</string>
+    <string name="keyboard_settings">Tastiera</string>
+    <string name="keyboard_settings_desc">Impostazioni tastiera</string>
     <string name="keep_on_screen">Mantieni sullo schermo</string>
     <string name="keyboardview_keycode_clipboard">appunti</string>
     <string name="increase_kbd_size">Ingrandisci tastiera</string>

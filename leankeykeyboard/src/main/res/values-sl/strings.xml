@@ -39,6 +39,8 @@
     <string name="keep_on_screen_desc">Naj bo na zaslonu, medtem ko je fizicna tipkovnica aktivna</string>
     <string name="misc">Mesano</string>
     <string name="misc_desc">Druge nastavitve</string>
+    <string name="keyboard_settings">Tipkovnica</string>
+    <string name="keyboard_settings_desc">Nastavitve tipkovnice</string>
     <string name="keep_on_screen">Obdrzi zaslon</string>
     <string name="keyboardview_keycode_clipboard">Izrez</string>
     <string name="increase_kbd_size">Povecaj tipkovnico</string>

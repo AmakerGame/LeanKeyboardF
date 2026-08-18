@@ -42,6 +42,8 @@
     <string name="keep_on_screen_desc">Toon Leankey ook als er een fysiek toetsenbord is aangesloten</string>
     <string name="misc">Overig</string>
     <string name="misc_desc">Overige instellingen</string>
+    <string name="keyboard_settings">Toetsenbord</string>
+    <string name="keyboard_settings_desc">Toetsenbordinstellingen</string>
     <string name="keep_on_screen">Altijd weergeven</string>
     <string name="keyboardview_keycode_clipboard">Klembord</string>
     <string name="increase_kbd_size">Toetsenbord vergroten</string>

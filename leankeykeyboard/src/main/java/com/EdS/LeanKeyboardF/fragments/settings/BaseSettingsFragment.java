@@ -12,6 +12,7 @@ import java.util.Map;
 public class BaseSettingsFragment extends GuidedStepSupportFragment {
     private Map<Long, CheckedAction> mCheckedActions = new LinkedHashMap<>();
     private Map<Long, NextAction> mNextActions = new LinkedHashMap<>();
+    private Map<Long, InfoAction> mInfoActions = new LinkedHashMap<>();
     private long mId;
 
     protected interface OnChecked {
@@ -68,10 +69,22 @@ public class BaseSettingsFragment extends GuidedStepSupportFragment {
         mNextActions.put(mId++, new NextAction(resId, onClick));
     }
 
+    // Info-only action (plain label row, no checkbox and no chevron -
+    // used for showing a current value like "Size: Normal" without it
+    // looking like a toggle)
+
+    protected void addInfoAction(String title, String desc) {
+        mInfoActions.put(mId++, new InfoAction(title, desc));
+    }
+
     @Override
     public void onCreateActions(@NonNull List<GuidedAction> actions, Bundle savedInstanceState) {
         for (long id : mCheckedActions.keySet()) {
             addCheckedItem(id, mCheckedActions.get(id), actions);
+        }
+
+        for (long id : mInfoActions.keySet()) {
+            addInfoItem(id, mInfoActions.get(id), actions);
         }
 
         for (long id : mNextActions.keySet()) {
@@ -99,6 +112,16 @@ public class BaseSettingsFragment extends GuidedStepSupportFragment {
                 .id(id)
                 .hasNext(true)
                 .title(nextAction.getResId()).build();
+        actions.add(action);
+    }
+
+    private void addInfoItem(long id, InfoAction infoAction, List<GuidedAction> actions) {
+        GuidedAction action = new GuidedAction.Builder(getActivity())
+                .id(id)
+                .infoOnly(true)
+                .title(infoAction.getTitle())
+                .description(infoAction.getDesc())
+                .build();
         actions.add(action);
     }
 
@@ -185,6 +208,24 @@ public class BaseSettingsFragment extends GuidedStepSupportFragment {
 
         public void onClick() {
             mOnClick.onClick();
+        }
+    }
+
+    private static class InfoAction {
+        private final String mTitle;
+        private final String mDesc;
+
+        public InfoAction(String title, String desc) {
+            mTitle = title;
+            mDesc = desc;
+        }
+
+        public String getTitle() {
+            return mTitle;
+        }
+
+        public String getDesc() {
+            return mDesc;
         }
     }
 }

@@ -39,6 +39,8 @@
     <string name="keep_on_screen_desc">Fiziksel klavye etkinken ekranda tutun</string>
     <string name="misc">Çeşitli</string>
     <string name="misc_desc">Diğer ayarlar</string>
+    <string name="keyboard_settings">Klavye</string>
+    <string name="keyboard_settings_desc">Klavye ayarları</string>
     <string name="keep_on_screen">Ekranda Tut</string>
     <string name="keyboardview_keycode_clipboard">Pano</string>
     <string name="increase_kbd_size">Klavyeyi büyüt</string>

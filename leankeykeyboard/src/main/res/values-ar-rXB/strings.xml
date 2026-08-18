@@ -24,7 +24,9 @@
     <string name="about_this_program">This program</string>
     <string name="settings">Settings</string>
     <string name="settings_desc">Additional settings</string>
-    <string name="physical_keyboard_mode">Physical keyboard mode</string>
+        <string name="keyboard_settings">Keyboard</string>
+    <string name="keyboard_settings_desc">Keyboard settings</string>
+<string name="physical_keyboard_mode">Physical keyboard mode</string>
     <string name="physical_keyboard_mode_desc">Add support for physical keyboard (Alt+Shift and Enter)</string>
     <string name="keyboard_size">Keyboard size</string>
     <string name="keyboard_size_desc">Current size: %1$s. Increase or decrease keyboard size</string>

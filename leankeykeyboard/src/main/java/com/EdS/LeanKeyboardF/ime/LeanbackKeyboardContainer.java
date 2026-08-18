@@ -22,6 +22,7 @@ import android.speech.SpeechRecognizer;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
@@ -196,6 +197,23 @@ public class LeanbackKeyboardContainer {
         final boolean isFloating = LeanKeyPreferences.instance(mContext).isFloatingKeyboard();
         final int rootLayoutRes = isFloating ? R.layout.root_leanback_floating : R.layout.root_leanback;
         mRootView = (RelativeLayout) mContext.getLayoutInflater().inflate(rootLayoutRes, null);
+        // inflate(id, null) has no parent to resolve the root tag's
+        // android:layout_width/height/gravity against, so those XML
+        // attributes are silently dropped. The view's real size/position
+        // comes from whatever LayoutParams it holds when the system later
+        // adds it to its own container (InputMethodService's mInputFrame,
+        // a FrameLayout) - which defaults to MATCH_PARENT x MATCH_PARENT
+        // if we don't set one explicitly here, overriding our "floating"
+        // wrap_content layout no matter what the XML says.
+        mRootView.setLayoutParams(isFloating
+                ? new FrameLayout.LayoutParams(
+                        FrameLayout.LayoutParams.WRAP_CONTENT,
+                        FrameLayout.LayoutParams.WRAP_CONTENT,
+                        Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL)
+                : new FrameLayout.LayoutParams(
+                        FrameLayout.LayoutParams.MATCH_PARENT,
+                        FrameLayout.LayoutParams.WRAP_CONTENT,
+                        Gravity.BOTTOM));
         mKeyboardsContainer = mRootView.findViewById(R.id.keyboard);
         mSuggestionsBg = mRootView.findViewById(R.id.candidate_background);
         mSuggestionsContainer = (HorizontalScrollView) mRootView.findViewById(R.id.suggestions_container);

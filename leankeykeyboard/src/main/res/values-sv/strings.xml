@@ -39,6 +39,8 @@
     <string name="keep_on_screen_desc">Förvara den på skärmen medan det fysiska tangentbordet är aktivt</string>
     <string name="misc">Blandat</string>
     <string name="misc_desc">Övriga inställningar</string>
+    <string name="keyboard_settings">Tangentbord</string>
+    <string name="keyboard_settings_desc">Tangentbordsinställningar</string>
     <string name="keep_on_screen">Håll på skärmen</string>
     <string name="keyboardview_keycode_clipboard">Urklipp</string>
     <string name="increase_kbd_size">Förstora tangentbordet</string>

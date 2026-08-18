@@ -41,6 +41,8 @@
     <string name="keep_on_screen_desc">Păstrați-l pe ecran în timp ce tastatura fizică este activă</string>
     <string name="misc">Diverse</string>
     <string name="misc_desc">Setări diverse</string>
+    <string name="keyboard_settings">Tastatură</string>
+    <string name="keyboard_settings_desc">Setări tastatură</string>
     <string name="keep_on_screen">Păstrați pe ecran</string>
     <string name="keyboardview_keycode_clipboard">Clipboard</string>
     <string name="increase_kbd_size">Mărește tastatura</string>

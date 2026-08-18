@@ -42,6 +42,8 @@
     <string name="keep_on_screen_desc">Keep it on screen while physical keyboard is active</string>
     <string name="misc">Misc</string>
     <string name="misc_desc">Misc Settings</string>
+    <string name="keyboard_settings">Keyboard</string>
+    <string name="keyboard_settings_desc">Keyboard settings</string>
     <string name="keep_on_screen">Keep on Screen</string>
     <string name="keyboardview_keycode_clipboard">Clipboard</string>
     <string name="increase_kbd_size">Enlarge keyboard</string>

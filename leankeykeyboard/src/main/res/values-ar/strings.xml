@@ -41,6 +41,8 @@
     <string name="keep_on_screen_desc">احتفظ به على الشاشة أثناء تنشيط لوحة المفاتيح الفعلية</string>
     <string name="misc">متفرقات</string>
     <string name="misc_desc">إعدادات متنوعة</string>
+    <string name="keyboard_settings">لوحة المفاتيح</string>
+    <string name="keyboard_settings_desc">إعدادات لوحة المفاتيح</string>
     <string name="keep_on_screen">ابق على الشاشة</string>
     <string name="keyboardview_keycode_clipboard">الحافظة</string>
     <string name="increase_kbd_size">تكبير لوحة المفاتيح</string>

@@ -25,38 +25,6 @@ public class MiscFragment extends BaseSettingsFragment {
         addCheckedAction(R.string.enable_suggestions, R.string.enable_suggestions_desc, mPrefs::getSuggestionsEnabled, mPrefs::setSuggestionsEnabled);
         addCheckedAction(R.string.show_launcher_icon, R.string.show_launcher_icon_desc, this::getLauncherIconShown, this::setLauncherIconShown);
         addCheckedAction(R.string.enable_cyclic_navigation, R.string.enable_cyclic_navigation_desc, mPrefs::isCyclicNavigationEnabled, mPrefs::setCyclicNavigationEnabled);
-
-        // New settings — default OFF
-        addCheckedAction(R.string.physical_keyboard_mode, R.string.physical_keyboard_mode_desc,
-                mPrefs::isPhysicalKeyboardMode, mPrefs::setPhysicalKeyboardMode);
-        addCheckedAction(R.string.floating_keyboard, R.string.floating_keyboard_desc,
-                mPrefs::isFloatingKeyboard, mPrefs::setFloatingKeyboard);
-
-        // Size controls (current size shown via description on Increase)
-        String current = getSizeLabel();
-        addCheckedAction(
-                getString(R.string.keyboard_size) + " (" + current + ")",
-                getString(R.string.keyboard_size_desc, current),
-                () -> mPrefs.getKeyboardSizeLevel() > 0,
-                checked -> {
-                    if (checked) {
-                        mPrefs.setKeyboardSizeLevel(1);
-                    } else {
-                        mPrefs.setKeyboardSizeLevel(0);
-                    }
-                }
-        );
-        addNextAction(R.string.increase_size, () -> mPrefs.increaseKeyboardSize());
-        addNextAction(R.string.decrease_size, () -> mPrefs.decreaseKeyboardSize());
-    }
-
-    private String getSizeLabel() {
-        int level = mPrefs.getKeyboardSizeLevel();
-        switch (level) {
-            case 1: return getString(R.string.size_large);
-            case 2: return getString(R.string.size_xlarge);
-            default: return getString(R.string.size_normal);
-        }
     }
 
     @NonNull
