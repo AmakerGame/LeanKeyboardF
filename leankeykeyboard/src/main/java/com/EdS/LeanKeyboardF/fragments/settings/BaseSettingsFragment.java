@@ -77,6 +77,25 @@ public class BaseSettingsFragment extends GuidedStepSupportFragment {
         mInfoActions.put(mId++, new InfoAction(title, desc));
     }
 
+    // Re-syncs every checkbox row's on-screen checked state from its
+    // backing GetChecked supplier. Used after a confirmation dialog is
+    // cancelled, since the leanback widget already flips its visual
+    // state on click, before our onChecked callback (and any dialog it
+    // shows) runs.
+    protected void refreshCheckedActions() {
+        if (getActions() == null) {
+            return;
+        }
+        for (int i = 0; i < getActions().size(); i++) {
+            GuidedAction action = getActions().get(i);
+            CheckedAction checkedAction = mCheckedActions.get(action.getId());
+            if (checkedAction != null) {
+                action.setChecked(checkedAction.isChecked());
+                notifyActionChanged(i);
+            }
+        }
+    }
+
     @Override
     public void onCreateActions(@NonNull List<GuidedAction> actions, Bundle savedInstanceState) {
         for (long id : mCheckedActions.keySet()) {

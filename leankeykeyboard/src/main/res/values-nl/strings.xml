@@ -48,7 +48,7 @@
     <string name="keyboardview_keycode_clipboard">Klembord</string>
     <string name="increase_kbd_size">Toetsenbord vergroten</string>
     <string name="increase_kbd_size_desc">Vergroot de toetsen</string>
-    <string name="kbd_activation_error2">Er is een fout opgetreden. Probeer \‘%s\’ in te schakelen middels onderstaande opdrachten. \n \n%s\n\n%s</string>
+    <string name="kbd_activation_error2">Er is een fout opgetreden. Probeer \‘%1$s\’ in te schakelen middels onderstaande opdrachten. \n \n%2$s\n\n%3$s</string>
     <string name="about_donate">Doneren</string>
     <string name="about_web_site">Website</string>
     <string name="kbd_activation_error">De systeemtoetsenbordinstellingen kunnen niet worden geopend. \nJe wordt doorgestuurd naar de instructiesite…</string>
@@ -75,6 +75,8 @@
     <string name="decrease_size">Decrease</string>
     <string name="floating_keyboard">Floating keyboard</string>
     <string name="floating_keyboard_desc">Enable floating (movable) keyboard mode</string>
+    <string name="floating_keyboard_warning_title">Waarschuwing</string>
+    <string name="floating_keyboard_warning_message">Zwevend toetsenbord is een experimentele functie en werkt mogelijk niet perfect.</string>
     <string name="size_normal">Normal</string>
     <string name="size_large">Large</string>
     <string name="size_xlarge">Extra large</string>

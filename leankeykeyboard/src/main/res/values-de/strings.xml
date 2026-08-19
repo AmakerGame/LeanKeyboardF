@@ -57,6 +57,8 @@
     <string name="decrease_size">Verkleinern</string>
     <string name="floating_keyboard">Schwebende Tastatur</string>
     <string name="floating_keyboard_desc">Schwebenden (beweglichen) Tastaturmodus aktivieren</string>
+    <string name="floating_keyboard_warning_title">Warnung</string>
+    <string name="floating_keyboard_warning_message">Die schwebende Tastatur ist eine experimentelle Funktion und funktioniert möglicherweise nicht einwandfrei.</string>
     <string name="size_normal">Normal</string>
     <string name="size_large">Groß</string>
     <string name="size_xlarge">Sehr groß</string>

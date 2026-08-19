@@ -45,7 +45,7 @@
     <string name="keyboardview_keycode_clipboard">appunti</string>
     <string name="increase_kbd_size">Ingrandisci tastiera</string>
     <string name="increase_kbd_size_desc">Aumenta le dimensioni della tastiera</string>
-    <string name="kbd_activation_error2">Errore. Prova ad attivare %s con i seguenti comandi. \n \n%s \n\n%s</string>
+    <string name="kbd_activation_error2">Errore. Prova ad attivare %1$s con i seguenti comandi. \n \n%2$s \n\n%3$s</string>
     <string name="about_donate">Donare</string>
     <string name="about_web_site">Sito web</string>
     <string name="kbd_activation_error">Impossibile aprire le impostazioni di kbd di sistema. \nReindirizzamento al sito con istruzioni manuali …</string>
@@ -73,6 +73,8 @@
     <string name="decrease_size">Diminuisci</string>
     <string name="floating_keyboard">Tastiera mobile</string>
     <string name="floating_keyboard_desc">Abilita modalità tastiera mobile (fluttuante)</string>
+    <string name="floating_keyboard_warning_title">Attenzione</string>
+    <string name="floating_keyboard_warning_message">La tastiera flottante è una funzione sperimentale e potrebbe non funzionare perfettamente.</string>
     <string name="size_normal">Normale</string>
     <string name="size_large">Grande</string>
     <string name="size_xlarge">Molto grande</string>

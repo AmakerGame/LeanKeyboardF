@@ -47,7 +47,7 @@
     <string name="keyboardview_keycode_clipboard">Clipboard</string>
     <string name="increase_kbd_size">Mărește tastatura</string>
     <string name="increase_kbd_size_desc">Măriți dimensiunea tastaturii</string>
-    <string name="kbd_activation_error2">A apărut o eroare. Încercați să activați %s cu comenzi mai jos.\n\n%s\n\n%s</string>
+    <string name="kbd_activation_error2">A apărut o eroare. Încercați să activați %1$s cu comenzi mai jos.\n\n%2$s\n\n%3$s</string>
     <string name="about_donate">Donează</string>
     <string name="about_web_site">Site Web</string>
     <string name="kbd_activation_error">Nu se pot deschide setările kbd ale sistemului.\nDirectarea la site cu instrucțiuni manuale...</string>
@@ -74,6 +74,8 @@
     <string name="decrease_size">Decrease</string>
     <string name="floating_keyboard">Floating keyboard</string>
     <string name="floating_keyboard_desc">Enable floating (movable) keyboard mode</string>
+    <string name="floating_keyboard_warning_title">Atenție</string>
+    <string name="floating_keyboard_warning_message">Tastatura plutitoare este o funcție experimentală și este posibil să nu funcționeze perfect.</string>
     <string name="size_normal">Normal</string>
     <string name="size_large">Large</string>
     <string name="size_xlarge">Extra large</string>

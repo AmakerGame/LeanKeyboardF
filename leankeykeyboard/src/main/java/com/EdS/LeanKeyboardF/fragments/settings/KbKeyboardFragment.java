@@ -1,5 +1,6 @@
 package com.EdS.LeanKeyboardF.fragments.settings;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -21,7 +22,7 @@ public class KbKeyboardFragment extends BaseSettingsFragment {
         addCheckedAction(R.string.physical_keyboard_mode, R.string.physical_keyboard_mode_desc,
                 mPrefs::isPhysicalKeyboardMode, mPrefs::setPhysicalKeyboardMode);
         addCheckedAction(R.string.floating_keyboard, R.string.floating_keyboard_desc,
-                mPrefs::isFloatingKeyboard, mPrefs::setFloatingKeyboard);
+                mPrefs::isFloatingKeyboard, this::onFloatingKeyboardToggled);
 
         // Current size is shown as a plain info row (not a checkbox - it
         // isn't a toggle), with Increase/Decrease as separate button-like
@@ -33,6 +34,31 @@ public class KbKeyboardFragment extends BaseSettingsFragment {
         );
         addNextAction(R.string.increase_size, () -> mPrefs.increaseKeyboardSize());
         addNextAction(R.string.decrease_size, () -> mPrefs.decreaseKeyboardSize());
+    }
+
+    // Turning the floating keyboard OFF applies immediately, no prompt.
+    // Turning it ON is gated behind a confirmation, since it's still an
+    // experimental feature - Cancel reverts the checkbox back to
+    // unchecked without changing the preference.
+    private void onFloatingKeyboardToggled(boolean checked) {
+        if (!checked) {
+            mPrefs.setFloatingKeyboard(false);
+            return;
+        }
+
+        new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.floating_keyboard_warning_title)
+                .setMessage(R.string.floating_keyboard_warning_message)
+                .setCancelable(false)
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    mPrefs.setFloatingKeyboard(true);
+                    refreshCheckedActions();
+                })
+                .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+                    mPrefs.setFloatingKeyboard(false);
+                    refreshCheckedActions();
+                })
+                .show();
     }
 
     private String getSizeLabel() {

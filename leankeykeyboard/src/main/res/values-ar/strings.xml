@@ -47,7 +47,7 @@
     <string name="keyboardview_keycode_clipboard">الحافظة</string>
     <string name="increase_kbd_size">تكبير لوحة المفاتيح</string>
     <string name="increase_kbd_size_desc">زيادة حجم لوحة المفاتيح</string>
-    <string name="kbd_activation_error2">حدث خطأ. حاول تنشيط٪ s باستخدام الأوامر أدناه. \n\n٪ s \n\n٪ s</string>
+    <string name="kbd_activation_error2">حدث خطأ. حاول تنشيط%1$s باستخدام الأوامر أدناه. \n\n%2$s \n\n%3$s</string>
     <string name="about_donate">تبرع</string>
     <string name="about_web_site">موقع الكتروني</string>
     <string name="kbd_activation_error">لا يمكن فتح إعدادات kbd للنظام. \nإعادة التوجيه إلى الموقع بتعليمات يدوية …</string>
@@ -75,6 +75,8 @@
     <string name="decrease_size">Decrease</string>
     <string name="floating_keyboard">Floating keyboard</string>
     <string name="floating_keyboard_desc">Enable floating (movable) keyboard mode</string>
+    <string name="floating_keyboard_warning_title">تحذير</string>
+    <string name="floating_keyboard_warning_message">لوحة المفاتيح العائمة ميزة تجريبية وقد لا تعمل بشكل مثالي.</string>
     <string name="size_normal">Normal</string>
     <string name="size_large">Large</string>
     <string name="size_xlarge">Extra large</string>

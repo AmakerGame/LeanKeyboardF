@@ -6,4 +6,5 @@
     android:shape="rectangle">
     <solid android:color="@color/keyboard_background" />
     <corners android:radius="@dimen/floating_keyboard_corner_radius" />
+    <stroke android:width="@dimen/floating_keyboard_border_width" android:color="@color/candidate_font_color" />
 </shape>

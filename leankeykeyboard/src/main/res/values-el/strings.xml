@@ -45,7 +45,7 @@
     <string name="keyboardview_keycode_clipboard">Πρόχειρο</string>
     <string name="increase_kbd_size">Μεγέθυνση πληκτρολογίου</string>
     <string name="increase_kbd_size_desc">Αυξήστε το μέγεθος του πληκτρολογίου</string>
-    <string name="kbd_activation_error2">Προέκυψε σφάλμα. Προσπαθήστε να ενεργοποιήσετε το %s με τις παρακάτω εντολές. \n \n%s \n\n%s</string>
+    <string name="kbd_activation_error2">Προέκυψε σφάλμα. Προσπαθήστε να ενεργοποιήσετε το %1$s με τις παρακάτω εντολές. \n \n%2$s \n\n%3$s</string>
     <string name="about_donate">Προσφέρω</string>
     <string name="about_web_site">Ιστοσελίδα</string>
     <string name="kbd_activation_error">Δεν είναι δυνατό το άνοιγμα των ρυθμίσεων kbd συστήματος. \nΑνακατεύθυνση στον ιστότοπο με μη αυτόματες οδηγίες…</string>
@@ -73,6 +73,8 @@
     <string name="decrease_size">Decrease</string>
     <string name="floating_keyboard">Floating keyboard</string>
     <string name="floating_keyboard_desc">Enable floating (movable) keyboard mode</string>
+    <string name="floating_keyboard_warning_title">Προειδοποίηση</string>
+    <string name="floating_keyboard_warning_message">Το αιωρούμενο πληκτρολόγιο είναι πειραματική λειτουργία και ενδέχεται να μην λειτουργεί σωστά.</string>
     <string name="size_normal">Normal</string>
     <string name="size_large">Large</string>
     <string name="size_xlarge">Extra large</string>

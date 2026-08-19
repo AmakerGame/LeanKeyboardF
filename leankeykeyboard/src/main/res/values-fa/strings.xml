@@ -47,7 +47,7 @@
     <string name="keyboardview_keycode_clipboard">کلیپ بورد</string>
     <string name="increase_kbd_size">صفحه کلید را بزرگ کنید</string>
     <string name="increase_kbd_size_desc">اندازه صفحه کلید را افزایش دهید</string>
-    <string name="kbd_activation_error2">خطا رخ داده است. سعی کنید٪ s را با دستورات زیر فعال کنید. \n\n٪ s \n\n٪ s</string>
+    <string name="kbd_activation_error2">خطا رخ داده است. سعی کنید%1$s را با دستورات زیر فعال کنید. \n\n%2$s \n\n%3$s</string>
     <string name="about_donate">اهدا کنید</string>
     <string name="about_web_site">سایت اینترنتی</string>
     <string name="kbd_activation_error">نمی توانید تنظیمات سیستم kbd را باز کنید. \nبا هدایت دستی به سایت هدایت شوید …</string>
@@ -75,6 +75,8 @@
     <string name="decrease_size">Decrease</string>
     <string name="floating_keyboard">Floating keyboard</string>
     <string name="floating_keyboard_desc">Enable floating (movable) keyboard mode</string>
+    <string name="floating_keyboard_warning_title">هشدار</string>
+    <string name="floating_keyboard_warning_message">صفحه‌کلید شناور یک ویژگی آزمایشی است و ممکن است به‌درستی کار نکند.</string>
     <string name="size_normal">Normal</string>
     <string name="size_large">Large</string>
     <string name="size_xlarge">Extra large</string>

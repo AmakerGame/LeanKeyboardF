@@ -15,6 +15,9 @@ public final class LeanKeyPreferences {
     public static final String THEME_DARK = "Dark";
     public static final String THEME_DARK2 = "Dark2";
     public static final String THEME_DARK3 = "Dark3";
+    public static final String THEME_LIGHT = "Light";
+    public static final String THEME_SYSTEM = "System";
+    public static final String THEME_DYNAMIC = "Dynamic";
     private static final String SUGGESTIONS_ENABLED = "suggestionsEnabled";
     private static final String CYCLIC_NAVIGATION_ENABLED = "cyclicNavigationEnabled";
     private static final String AUTODETECT_LAYOUT = "autodetectLayout";

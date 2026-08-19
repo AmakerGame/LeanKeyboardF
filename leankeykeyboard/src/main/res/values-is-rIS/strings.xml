@@ -45,7 +45,7 @@
     <string name="keyboardview_keycode_clipboard">Klemmuspjald</string>
     <string name="increase_kbd_size">Stækka lyklaborðið</string>
     <string name="increase_kbd_size_desc">Auka stærð lyklaborðsins</string>
-    <string name="kbd_activation_error2">Villa kom upp. Reyndu að virkja %s með skipunum hér að neðan. \n \n%s \n\n%s</string>
+    <string name="kbd_activation_error2">Villa kom upp. Reyndu að virkja %1$s með skipunum hér að neðan. \n \n%2$s \n\n%3$s</string>
     <string name="about_donate">Gefa</string>
     <string name="about_web_site">Vefsíða</string>
     <string name="kbd_activation_error">Getur ekki opnað kbd stillingar kerfisins. \n Vísar á vefinn með handvirkum leiðbeiningum …</string>
@@ -73,6 +73,8 @@
     <string name="decrease_size">Decrease</string>
     <string name="floating_keyboard">Floating keyboard</string>
     <string name="floating_keyboard_desc">Enable floating (movable) keyboard mode</string>
+    <string name="floating_keyboard_warning_title">Viðvörun</string>
+    <string name="floating_keyboard_warning_message">Fljótandi lyklaborð er tilraunaeiginleiki og gæti ekki virkað fullkomlega.</string>
     <string name="size_normal">Normal</string>
     <string name="size_large">Large</string>
     <string name="size_xlarge">Extra large</string>

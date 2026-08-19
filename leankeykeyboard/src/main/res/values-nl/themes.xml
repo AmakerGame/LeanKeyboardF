@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="keyboard_themes">
+        <item>Standaardthema|Default</item>
+        <item>Zwart donker|Dark</item>
+        <item>Mint donker|Dark2</item>
+        <item>Grafiet donker|Dark3</item>
+        <item>Licht|Light</item>
+        <item>Systeem|System</item>
+        <item>Dynamic Color|Dynamic</item>
+    </string-array>
+</resources>

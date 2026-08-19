@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="keyboard_themes">
+        <item>السمة الافتراضية|Default</item>
+        <item>أسود داكن|Dark</item>
+        <item>نعناعي داكن|Dark2</item>
+        <item>غرافيت داكن|Dark3</item>
+        <item>فاتح|Light</item>
+        <item>النظام|System</item>
+        <item>Dynamic Color|Dynamic</item>
+    </string-array>
+</resources>

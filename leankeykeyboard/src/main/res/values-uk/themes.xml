@@ -2,8 +2,11 @@
 <resources>
     <string-array name="keyboard_themes">
         <item>Тема за замовчуванням|Default</item>
-        <item>Темна тема|Dark</item>
-        <item>Темна тема 2|Dark2</item>
-        <item>Темна тема 3|Dark3</item>
+        <item>Чорна темна|Dark</item>
+        <item>М\'ятна темна|Dark2</item>
+        <item>Графітова темна|Dark3</item>
+        <item>Світла|Light</item>
+        <item>Системна|System</item>
+        <item>Dynamic Color|Dynamic</item>
     </string-array>
 </resources>

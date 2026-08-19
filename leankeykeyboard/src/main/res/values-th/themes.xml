@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="keyboard_themes">
+        <item>ธีมเริ่มต้น|Default</item>
+        <item>มืดสีดำ|Dark</item>
+        <item>มืดมินต์|Dark2</item>
+        <item>มืดแกรไฟต์|Dark3</item>
+        <item>สว่าง|Light</item>
+        <item>ระบบ|System</item>
+        <item>Dynamic Color|Dynamic</item>
+    </string-array>
+</resources>

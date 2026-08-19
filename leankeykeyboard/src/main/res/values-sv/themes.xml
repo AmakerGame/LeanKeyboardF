@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="keyboard_themes">
+        <item>Standardtema|Default</item>
+        <item>Svart mörk|Dark</item>
+        <item>Mint mörk|Dark2</item>
+        <item>Grafit mörk|Dark3</item>
+        <item>Ljust|Light</item>
+        <item>System|System</item>
+        <item>Dynamic Color|Dynamic</item>
+    </string-array>
+</resources>

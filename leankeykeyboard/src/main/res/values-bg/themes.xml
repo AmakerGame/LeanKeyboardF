@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="keyboard_themes">
+        <item>Тема по подразбиране|Default</item>
+        <item>Черна тъмна|Dark</item>
+        <item>Мента тъмна|Dark2</item>
+        <item>Графитена тъмна|Dark3</item>
+        <item>Светла|Light</item>
+        <item>Системна|System</item>
+        <item>Dynamic Color|Dynamic</item>
+    </string-array>
+</resources>

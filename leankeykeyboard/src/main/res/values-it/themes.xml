@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="keyboard_themes">
+        <item>Tema predefinito|Default</item>
+        <item>Nero scuro|Dark</item>
+        <item>Menta scuro|Dark2</item>
+        <item>Grafite scuro|Dark3</item>
+        <item>Chiaro|Light</item>
+        <item>Sistema|System</item>
+        <item>Dynamic Color|Dynamic</item>
+    </string-array>
+</resources>

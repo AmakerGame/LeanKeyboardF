@@ -36,5 +36,8 @@
         <!-- Korean -->
         <item>한국어|ko_kr</item>
         <item>ქართული|ka</item>
+        <!-- Portuguese -->
+        <item>Português|pt</item>
+        <item>Português (Brasil)|pt_br</item>
     </string-array>
 </resources>

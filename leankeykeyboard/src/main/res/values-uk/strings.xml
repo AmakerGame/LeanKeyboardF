@@ -37,7 +37,7 @@
     <string name="keyboard_settings_desc">Налаштування клавіатури</string>
     <string name="increase_kbd_size">Збільшити</string>
     <string name="increase_kbd_size_desc">Збільшити клавіатуру</string>
-    <string name="kbd_activation_error2">Трапилася помилка. Спробуйте активувати %s цими командами.\n\n%s\n\n%s</string>
+    <string name="kbd_activation_error2">Трапилася помилка. Спробуйте активувати %1$s цими командами.\n\n%2$s\n\n%3$s</string>
     <string name="about_donate">Допомогти проекту</string>
     <string name="about_web_site">Вебсайт</string>
     <string name="kbd_activation_error">Не вдається відкрити системні налаштування клавіатури.\nПеренаправлення на сайт з інструкцією для ручного активування…</string>
@@ -64,6 +64,8 @@
     <string name="decrease_size">Зменшити</string>
     <string name="floating_keyboard">Плаваюча клавіатура</string>
     <string name="floating_keyboard_desc">Увімкнути плаваючий (переміщуваний) режим клавіатури</string>
+    <string name="floating_keyboard_warning_title">Увага</string>
+    <string name="floating_keyboard_warning_message">Плаваюча клавіатура — експериментальна функція і може працювати нестабільно.</string>
     <string name="size_normal">Звичайний</string>
     <string name="size_large">Великий</string>
     <string name="size_xlarge">Дуже великий</string>

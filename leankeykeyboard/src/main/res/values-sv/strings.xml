@@ -45,7 +45,7 @@
     <string name="keyboardview_keycode_clipboard">Urklipp</string>
     <string name="increase_kbd_size">Förstora tangentbordet</string>
     <string name="increase_kbd_size_desc">Öka tangentbordets storlek</string>
-    <string name="kbd_activation_error2">Fel inträffade. Försök att aktivera %s med kommandon nedan. \n \n%s \n\n%s</string>
+    <string name="kbd_activation_error2">Fel inträffade. Försök att aktivera %1$s med kommandon nedan. \n \n%2$s \n\n%3$s</string>
     <string name="about_donate">Donera</string>
     <string name="about_web_site">Hemsida</string>
     <string name="kbd_activation_error">Kan inte öppna system-kbd-inställningar. \n Vänta till webbplatsen med manuella instruktioner …</string>
@@ -73,6 +73,8 @@
     <string name="decrease_size">Decrease</string>
     <string name="floating_keyboard">Floating keyboard</string>
     <string name="floating_keyboard_desc">Enable floating (movable) keyboard mode</string>
+    <string name="floating_keyboard_warning_title">Varning</string>
+    <string name="floating_keyboard_warning_message">Svävande tangentbord är en experimentell funktion och kanske inte fungerar perfekt.</string>
     <string name="size_normal">Normal</string>
     <string name="size_large">Large</string>
     <string name="size_xlarge">Extra large</string>

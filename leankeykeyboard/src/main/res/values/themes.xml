@@ -2,8 +2,11 @@
 <resources>
     <string-array name="keyboard_themes">
         <item>Default Theme|Default</item>
-        <item>Dark Theme|Dark</item>
-        <item>Dark Theme 2|Dark2</item>
-        <item>Dark Theme 3|Dark3</item>
+        <item>Black Dark|Dark</item>
+        <item>Mint Dark|Dark2</item>
+        <item>Graphite Dark|Dark3</item>
+        <item>Light|Light</item>
+        <item>System|System</item>
+        <item>Dynamic Color|Dynamic</item>
     </string-array>
 </resources>

@@ -45,7 +45,7 @@
     <string name="keyboardview_keycode_clipboard">Izrez</string>
     <string name="increase_kbd_size">Povecaj tipkovnico</string>
     <string name="increase_kbd_size_desc">Povecaj velikost tipkovnice</string>
-    <string name="kbd_activation_error2">Prislo je do napake. Poskusi omogociti %s s spodnjimi ukazi. \n \n%s \n\n%s</string>
+    <string name="kbd_activation_error2">Prislo je do napake. Poskusi omogociti %1$s s spodnjimi ukazi. \n \n%2$s \n\n%3$s</string>
     <string name="about_donate">Doniraj</string>
     <string name="about_web_site">Domaca stran</string>
     <string name="kbd_activation_error">Sistemskih nastavitev kbd ni mogoce odpreti. \n Pocakaj na spletno mesto z rocnimi navodili ...</string>
@@ -73,6 +73,8 @@
     <string name="decrease_size">Decrease</string>
     <string name="floating_keyboard">Floating keyboard</string>
     <string name="floating_keyboard_desc">Enable floating (movable) keyboard mode</string>
+    <string name="floating_keyboard_warning_title">Opozorilo</string>
+    <string name="floating_keyboard_warning_message">Plavajoča tipkovnica je eksperimentalna funkcija in morda ne bo delovala popolno.</string>
     <string name="size_normal">Normal</string>
     <string name="size_large">Large</string>
     <string name="size_xlarge">Extra large</string>

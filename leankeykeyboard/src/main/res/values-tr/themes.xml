@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="keyboard_themes">
+        <item>Varsayılan Tema|Default</item>
+        <item>Siyah Koyu|Dark</item>
+        <item>Nane Koyu|Dark2</item>
+        <item>Grafit Koyu|Dark3</item>
+        <item>Açık|Light</item>
+        <item>Sistem|System</item>
+        <item>Dynamic Color|Dynamic</item>
+    </string-array>
+</resources>

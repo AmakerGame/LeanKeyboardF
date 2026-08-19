@@ -45,7 +45,7 @@
     <string name="keyboardview_keycode_clipboard">Pano</string>
     <string name="increase_kbd_size">Klavyeyi büyüt</string>
     <string name="increase_kbd_size_desc">Klavye boyutunu büyüt</string>
-    <string name="kbd_activation_error2">Hata oluştu. %s komutunu aşağıdaki komutlarla etkinleştirmeyi deneyin. \n \n%s \n\n%s</string>
+    <string name="kbd_activation_error2">Hata oluştu. %1$s komutunu aşağıdaki komutlarla etkinleştirmeyi deneyin. \n \n%2$s \n\n%3$s</string>
     <string name="about_donate">bağışlamak</string>
     <string name="about_web_site">İnternet sitesi</string>
     <string name="kbd_activation_error">Sistem kbd ayarları açılamıyor. \nManuel talimatlarla siteye yönlendiriliyor…</string>
@@ -73,6 +73,8 @@
     <string name="decrease_size">Decrease</string>
     <string name="floating_keyboard">Floating keyboard</string>
     <string name="floating_keyboard_desc">Enable floating (movable) keyboard mode</string>
+    <string name="floating_keyboard_warning_title">Uyarı</string>
+    <string name="floating_keyboard_warning_message">Kayan klavye deneysel bir özelliktir ve tam olarak sorunsuz çalışmayabilir.</string>
     <string name="size_normal">Normal</string>
     <string name="size_large">Large</string>
     <string name="size_xlarge">Extra large</string>

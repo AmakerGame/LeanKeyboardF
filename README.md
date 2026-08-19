@@ -44,6 +44,9 @@ LeanKeyboardF aims to extend the original project with additional tools for keyb
 
 - Keyboard size: https://github.com/yuliskov/LeanKeyboard/issues/73
 - Floating keyboard: https://github.com/yuliskov/LeanKeyboard/issues/47
+- Portuguese (Brazil) language: https://github.com/yuliskov/LeanKeyboard/issues/53
+- Portuguese (Portugal) language: https://github.com/yuliskov/LeanKeyboard/issues/80
+- New keyboard themes: Light, System (follows device theme), and Dynamic Color (Material You, Android 12+)
 
 ---
 

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="keyboard_themes">
+        <item>تم پیش‌فرض|Default</item>
+        <item>تیره مشکی|Dark</item>
+        <item>تیره نعنایی|Dark2</item>
+        <item>تیره گرافیتی|Dark3</item>
+        <item>روشن|Light</item>
+        <item>سیستم|System</item>
+        <item>Dynamic Color|Dynamic</item>
+    </string-array>
+</resources>

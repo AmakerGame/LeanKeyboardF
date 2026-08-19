@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="keyboard_themes">
+        <item>Προεπιλεγμένο θέμα|Default</item>
+        <item>Μαύρο σκούρο|Dark</item>
+        <item>Μέντα σκούρο|Dark2</item>
+        <item>Γραφίτης σκούρο|Dark3</item>
+        <item>Ανοιχτόχρωμο|Light</item>
+        <item>Σύστημα|System</item>
+        <item>Dynamic Color|Dynamic</item>
+    </string-array>
+</resources>

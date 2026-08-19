@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="keyboard_themes">
+        <item>Privzeta tema|Default</item>
+        <item>Črna temna|Dark</item>
+        <item>Meta temna|Dark2</item>
+        <item>Grafit temna|Dark3</item>
+        <item>Svetla|Light</item>
+        <item>Sistemska|System</item>
+        <item>Dynamic Color|Dynamic</item>
+    </string-array>
+</resources>

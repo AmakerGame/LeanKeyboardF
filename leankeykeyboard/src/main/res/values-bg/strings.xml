@@ -45,7 +45,7 @@
     <string name="keyboardview_keycode_clipboard">клипборда</string>
     <string name="increase_kbd_size">Уголемяване на клавиатурата</string>
     <string name="increase_kbd_size_desc">Увеличете размера на клавиатурата</string>
-    <string name="kbd_activation_error2">Възникна грешка. Опитайте да активирате %s с команди по-долу. \n \n%s \n\n%s</string>
+    <string name="kbd_activation_error2">Възникна грешка. Опитайте да активирате %1$s с команди по-долу. \n \n%2$s \n\n%3$s</string>
     <string name="about_donate">Дарете</string>
     <string name="about_web_site">Уеб сайт</string>
     <string name="kbd_activation_error">Не мога да отворя настройките на системния kbd. \nПренасочване към сайта с ръчни инструкции …</string>
@@ -73,6 +73,8 @@
     <string name="decrease_size">Decrease</string>
     <string name="floating_keyboard">Floating keyboard</string>
     <string name="floating_keyboard_desc">Enable floating (movable) keyboard mode</string>
+    <string name="floating_keyboard_warning_title">Внимание</string>
+    <string name="floating_keyboard_warning_message">Плаващата клавиатура е експериментална функция и може да не работи идеално.</string>
     <string name="size_normal">Normal</string>
     <string name="size_large">Large</string>
     <string name="size_xlarge">Extra large</string>

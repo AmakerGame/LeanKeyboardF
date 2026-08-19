@@ -1,8 +1,10 @@
 package com.EdS.LeanKeyboardF.addons.theme;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,9 +28,16 @@ public class ThemeManager {
     }
 
     public void updateKeyboardTheme() {
-        String currentThemeId = mPrefs.getCurrentTheme();
+        String rawTheme = mPrefs.getCurrentTheme();
 
-        if (LeanKeyPreferences.THEME_DEFAULT.equals(currentThemeId)) {
+        if (LeanKeyPreferences.THEME_DYNAMIC.equals(rawTheme) && supportsDynamicColor()) {
+            applyDynamicKeyboardColors();
+            return;
+        }
+
+        String themeId = resolveEffectiveThemeId(rawTheme);
+
+        if (LeanKeyPreferences.THEME_DEFAULT.equals(themeId)) {
             applyKeyboardColors(
                     R.color.keyboard_background,
                     R.color.candidate_background,
@@ -37,41 +46,86 @@ public class ThemeManager {
             );
             applyShiftDrawable(-1);
         } else {
-            applyForTheme((String themeId) -> {
-                Resources resources = mContext.getResources();
-                int keyboardBackgroundResId = resources.getIdentifier("keyboard_background_" + themeId.toLowerCase(), "color", mContext.getPackageName());
-                int candidateBackgroundResId = resources.getIdentifier("candidate_background_" + themeId.toLowerCase(), "color", mContext.getPackageName());
-                int enterFontColorResId = resources.getIdentifier("enter_key_font_color_" + themeId.toLowerCase(), "color", mContext.getPackageName());
-                int keyTextColorResId = resources.getIdentifier("key_text_default_" + themeId.toLowerCase(), "color", mContext.getPackageName());
+            Resources resources = mContext.getResources();
+            int keyboardBackgroundResId = resources.getIdentifier("keyboard_background_" + themeId.toLowerCase(), "color", mContext.getPackageName());
+            int candidateBackgroundResId = resources.getIdentifier("candidate_background_" + themeId.toLowerCase(), "color", mContext.getPackageName());
+            int enterFontColorResId = resources.getIdentifier("enter_key_font_color_" + themeId.toLowerCase(), "color", mContext.getPackageName());
+            int keyTextColorResId = resources.getIdentifier("key_text_default_" + themeId.toLowerCase(), "color", mContext.getPackageName());
 
-                applyKeyboardColors(
-                        keyboardBackgroundResId,
-                        candidateBackgroundResId,
-                        enterFontColorResId,
-                        keyTextColorResId
-                );
+            applyKeyboardColors(
+                    keyboardBackgroundResId,
+                    candidateBackgroundResId,
+                    enterFontColorResId,
+                    keyTextColorResId
+            );
 
-                int shiftLockOnResId = resources.getIdentifier("ic_ime_shift_lock_on_" + themeId.toLowerCase(), "drawable", mContext.getPackageName());
+            int shiftLockOnResId = resources.getIdentifier("ic_ime_shift_lock_on_" + themeId.toLowerCase(), "drawable", mContext.getPackageName());
 
-                applyShiftDrawable(shiftLockOnResId);
-            });
+            applyShiftDrawable(shiftLockOnResId);
         }
     }
 
     public void updateSuggestionsTheme() {
-        String currentTheme = mPrefs.getCurrentTheme();
+        String rawTheme = mPrefs.getCurrentTheme();
 
-        if (LeanKeyPreferences.THEME_DEFAULT.equals(currentTheme)) {
-            applySuggestionsColors(
-                    R.color.candidate_font_color
-            );
-        } else {
-            applyForTheme((String themeId) -> {
-                Resources resources = mContext.getResources();
-                int candidateFontColorResId = resources.getIdentifier("candidate_font_color_" + themeId.toLowerCase(), "color", mContext.getPackageName());
-                applySuggestionsColors(candidateFontColorResId);
-            });
+        if (LeanKeyPreferences.THEME_DYNAMIC.equals(rawTheme) && supportsDynamicColor()) {
+            applyDynamicSuggestionsColors();
+            return;
         }
+
+        String themeId = resolveEffectiveThemeId(rawTheme);
+
+        if (LeanKeyPreferences.THEME_DEFAULT.equals(themeId)) {
+            applySuggestionsColors(R.color.candidate_font_color);
+        } else {
+            Resources resources = mContext.getResources();
+            int candidateFontColorResId = resources.getIdentifier("candidate_font_color_" + themeId.toLowerCase(), "color", mContext.getPackageName());
+            applySuggestionsColors(candidateFontColorResId);
+        }
+    }
+
+    // "System" follows the device's current light/dark UI setting - it's
+    // resolved to one of the concrete themes below, not a color set of
+    // its own. "Dynamic Color" is handled separately (applyDynamic*),
+    // since it doesn't come from a color resource at all.
+    private String resolveEffectiveThemeId(String rawTheme) {
+        if (LeanKeyPreferences.THEME_SYSTEM.equals(rawTheme)) {
+            return isSystemInDarkMode() ? LeanKeyPreferences.THEME_DARK3 : LeanKeyPreferences.THEME_LIGHT;
+        }
+
+        if (LeanKeyPreferences.THEME_DYNAMIC.equals(rawTheme)) {
+            // Dynamic Color isn't available on this device's API level -
+            // fall back to the default look.
+            return LeanKeyPreferences.THEME_DEFAULT;
+        }
+
+        return rawTheme;
+    }
+
+    private boolean isSystemInDarkMode() {
+        int nightModeFlags = mContext.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        return nightModeFlags == Configuration.UI_MODE_NIGHT_YES;
+    }
+
+    private boolean supportsDynamicColor() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.S;
+    }
+
+    // Material You: colors generated by the system from the user's
+    // wallpaper (Android 12+). Falls back to the Default theme on older
+    // devices (see resolveEffectiveThemeId).
+    private void applyDynamicKeyboardColors() {
+        applyKeyboardColors(
+                android.R.color.system_neutral1_900,
+                android.R.color.system_neutral1_800,
+                android.R.color.system_accent1_200,
+                android.R.color.system_neutral1_50
+        );
+        applyShiftDrawable(-1);
+    }
+
+    private void applyDynamicSuggestionsColors() {
+        applySuggestionsColors(android.R.color.system_accent1_200);
     }
 
     private void applyKeyboardColors(
@@ -133,27 +187,5 @@ public class ThemeManager {
 
             keyboardView.setCapsLockDrawable(drawable);
         }
-    }
-
-    private void applyForTheme(ThemeCallback callback) {
-        String currentThemeId = mPrefs.getCurrentTheme();
-        Resources resources = mContext.getResources();
-        String[] themes = resources.getStringArray(R.array.keyboard_themes);
-
-        for (String theme : themes) {
-            String[] split = theme.split("\\|");
-            String themeName = split[0];
-            String themeId = split[1];
-
-            if (currentThemeId.equals(themeId)) {
-                callback.onThemeFound(themeId);
-
-                break;
-            }
-        }
-    }
-
-    private interface ThemeCallback {
-        void onThemeFound(String themeId);
     }
 }

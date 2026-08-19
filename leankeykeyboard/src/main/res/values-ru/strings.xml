@@ -37,7 +37,7 @@
     <string name="keyboard_settings_desc">Настройки клавиатуры</string>
     <string name="increase_kbd_size">Увеличить</string>
     <string name="increase_kbd_size_desc">Увеличить клавиатуру</string>
-    <string name="kbd_activation_error2">Произошла ошибка. Попробуйте активировать %s командами ниже.\n\n%s\n\n%s</string>
+    <string name="kbd_activation_error2">Произошла ошибка. Попробуйте активировать %1$s командами ниже.\n\n%2$s\n\n%3$s</string>
     <string name="about_donate">Помочь проекту</string>
     <string name="about_web_site">Веб-сайт</string>
     <string name="kbd_activation_error">Не получается открыть системные настройки клавиатуры.\nПеренаправление на сайт с инструкцией по ручной активации…</string>
@@ -64,6 +64,8 @@
     <string name="decrease_size">Уменьшить</string>
     <string name="floating_keyboard">Плавающая клавиатура</string>
     <string name="floating_keyboard_desc">Включить плавающий (перемещаемый) режим клавиатуры</string>
+    <string name="floating_keyboard_warning_title">Внимание</string>
+    <string name="floating_keyboard_warning_message">Плавающая клавиатура — экспериментальная функция и может работать нестабильно.</string>
     <string name="size_normal">Обычный</string>
     <string name="size_large">Большой</string>
     <string name="size_xlarge">Очень большой</string>

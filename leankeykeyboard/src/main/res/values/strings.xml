@@ -48,7 +48,7 @@
     <string name="keyboardview_keycode_clipboard">Clipboard</string>
     <string name="increase_kbd_size">Enlarge keyboard</string>
     <string name="increase_kbd_size_desc">Increase keyboard size</string>
-    <string name="kbd_activation_error2">Error occurred. Try to activate %s with commands below.\n\n%s\n\n%s</string>
+    <string name="kbd_activation_error2">Error occurred. Try to activate %1$s with commands below.\n\n%2$s\n\n%3$s</string>
     <string name="about_donate">Donate</string>
     <string name="about_web_site">Web Site</string>
     <string name="kbd_activation_error">Can\'t open system kbd settings.\nRedirecting to site with manual instructions…</string>
@@ -75,6 +75,8 @@
     <string name="decrease_size">Decrease</string>
     <string name="floating_keyboard">Floating keyboard</string>
     <string name="floating_keyboard_desc">Enable floating (movable) keyboard mode</string>
+    <string name="floating_keyboard_warning_title">Warning</string>
+    <string name="floating_keyboard_warning_message">Floating keyboard is an experimental feature and may not work perfectly.</string>
     <string name="size_normal">Normal</string>
     <string name="size_large">Large</string>
     <string name="size_xlarge">Extra large</string>

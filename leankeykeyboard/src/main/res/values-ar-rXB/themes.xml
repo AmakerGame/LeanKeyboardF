@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="keyboard_themes">
+        <item>Default Theme|Default</item>
+        <item>Black Dark|Dark</item>
+        <item>Mint Dark|Dark2</item>
+        <item>Graphite Dark|Dark3</item>
+        <item>Light|Light</item>
+        <item>System|System</item>
+        <item>Dynamic Color|Dynamic</item>
+    </string-array>
+</resources>

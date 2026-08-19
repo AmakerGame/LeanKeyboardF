@@ -32,6 +32,8 @@
     <string name="decrease_size">Decrease</string>
     <string name="floating_keyboard">Floating keyboard</string>
     <string name="floating_keyboard_desc">Enable floating (movable) keyboard mode</string>
+    <string name="floating_keyboard_warning_title">คำเตือน</string>
+    <string name="floating_keyboard_warning_message">แป้นพิมพ์ลอยเป็นฟีเจอร์ทดลองและอาจทำงานไม่สมบูรณ์แบบ</string>
     <string name="size_normal">Normal</string>
     <string name="size_large">Large</string>
     <string name="size_xlarge">Extra large</string>
