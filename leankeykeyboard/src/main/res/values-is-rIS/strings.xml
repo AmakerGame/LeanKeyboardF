@@ -2,6 +2,11 @@
 <resources>
     <string name="label_go_key">Áfram</string>
     <string name="label_next_key">Næsta</string>
+    <string name="action_select_all">Velja allt</string>
+    <string name="action_copy">Afrita</string>
+    <string name="action_cut">Klippa</string>
+    <string name="action_paste">Líma</string>
+    <string name="action_clear">Hreinsa</string>
     <string name="label_send_key">Senda</string>
     <string name="label_search_key">Leita</string>
     <string name="label_done_key">Lokið</string>

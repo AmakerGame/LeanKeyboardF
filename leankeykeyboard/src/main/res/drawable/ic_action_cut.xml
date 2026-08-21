@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- "Cut": simplified scissors (two finger loops + crossing blades). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M9.5,17 a2.5,2.5 0 1,1 -5,0 a2.5,2.5 0 1,1 5,0 M9.5,7 a2.5,2.5 0 1,1 -5,0 a2.5,2.5 0 1,1 5,0 M7,9.3 L18,17.5 M7,14.7 L18,6.5" />
+</vector>

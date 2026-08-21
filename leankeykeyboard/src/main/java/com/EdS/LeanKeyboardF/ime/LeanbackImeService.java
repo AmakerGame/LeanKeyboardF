@@ -152,6 +152,37 @@ public class LeanbackImeService extends KeyMapperImeService {
 
                     updateSuggestions = false;
                     break;
+                case InputListener.ENTRY_TYPE_CLIPBOARD:
+                    // keyCode is which button was pressed: 0=Clear,
+                    // 1=Select All, 2=Copy, 3=Cut, 4=Paste - matches the
+                    // button order in input_leanback.xml's
+                    // action_buttons column.
+                    switch (keyCode) {
+                        case 0: // Clear - wipes the whole field, not just around the cursor
+                            connection.deleteSurroundingText(Integer.MAX_VALUE, Integer.MAX_VALUE);
+                            mEnterSpaceBeforeCommitting = false;
+                            break;
+                        case 1: // Select All
+                            connection.performContextMenuAction(android.R.id.selectAll);
+                            break;
+                        case 2: // Copy
+                            connection.performContextMenuAction(android.R.id.copy);
+                            break;
+                        case 3: // Cut
+                            connection.performContextMenuAction(android.R.id.cut);
+                            mEnterSpaceBeforeCommitting = false;
+                            break;
+                        case 4: // Paste
+                            connection.performContextMenuAction(android.R.id.paste);
+                            mEnterSpaceBeforeCommitting = false;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    clearSuggestionsDelayed();
+                    updateSuggestions = true;
+                    break;
                 case InputListener.ENTRY_TYPE_LEFT:
                 case InputListener.ENTRY_TYPE_RIGHT:
                     BidiFormatter formatter = BidiFormatter.getInstance();

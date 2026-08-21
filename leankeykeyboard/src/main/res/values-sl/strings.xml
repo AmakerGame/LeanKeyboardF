@@ -2,6 +2,11 @@
 <resources>
     <string name="label_go_key">Pojdi</string>
     <string name="label_next_key">Naslednji</string>
+    <string name="action_select_all">Izberi vse</string>
+    <string name="action_copy">Kopiraj</string>
+    <string name="action_cut">Izreži</string>
+    <string name="action_paste">Prilepi</string>
+    <string name="action_clear">Počisti</string>
     <string name="label_send_key">Poslji</string>
     <string name="label_search_key">Iskanje</string>
     <string name="label_done_key">Narejeno</string>

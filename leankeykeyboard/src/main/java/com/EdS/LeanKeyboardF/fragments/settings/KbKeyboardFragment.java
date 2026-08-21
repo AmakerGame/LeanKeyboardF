@@ -19,8 +19,6 @@ public class KbKeyboardFragment extends BaseSettingsFragment {
 
         mPrefs = LeanKeyPreferences.instance(getActivity());
 
-        addCheckedAction(R.string.physical_keyboard_mode, R.string.physical_keyboard_mode_desc,
-                mPrefs::isPhysicalKeyboardMode, mPrefs::setPhysicalKeyboardMode);
         addCheckedAction(R.string.floating_keyboard, R.string.floating_keyboard_desc,
                 mPrefs::isFloatingKeyboard, this::onFloatingKeyboardToggled);
 

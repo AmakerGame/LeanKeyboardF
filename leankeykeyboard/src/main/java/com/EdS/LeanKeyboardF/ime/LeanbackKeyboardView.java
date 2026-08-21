@@ -9,6 +9,8 @@ import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -228,6 +230,14 @@ public class LeanbackKeyboardView extends FrameLayout {
 
             int dx = (key.width - padding.left - padding.right - iconWidth) / 2 + padding.left;
             int dy = (key.height - padding.top - padding.bottom - iconHeight) / 2 + padding.top;
+
+            // Icon assets (space, delete, shift, arrows, etc.) are plain
+            // light-colored bitmaps baked for a dark background. Without
+            // tinting them they stay light on the Light theme too and
+            // become nearly invisible - tint them with the same color
+            // used for letter/number key labels so they follow whatever
+            // theme is active.
+            key.icon.setColorFilter(new PorterDuffColorFilter(mKeyTextColor, PorterDuff.Mode.SRC_IN));
 
             canvas.translate((float) dx, (float) dy);
             key.icon.setBounds(0, 0, iconWidth, iconHeight);

@@ -2,6 +2,11 @@
 <resources>
     <string name="label_go_key">انتقال</string>
     <string name="label_next_key">التالي</string>
+    <string name="action_select_all">تحديد الكل</string>
+    <string name="action_copy">نسخ</string>
+    <string name="action_cut">قص</string>
+    <string name="action_paste">لصق</string>
+    <string name="action_clear">مسح</string>
     <string name="label_send_key">إرسال</string>
     <string name="label_search_key">بحث</string>
     <string name="label_done_key">تم</string>

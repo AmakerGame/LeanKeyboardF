@@ -2,6 +2,11 @@
 <resources>
     <string name="label_go_key">Kör</string>
     <string name="label_next_key">Nästa</string>
+    <string name="action_select_all">Markera allt</string>
+    <string name="action_copy">Kopiera</string>
+    <string name="action_cut">Klipp ut</string>
+    <string name="action_paste">Klistra in</string>
+    <string name="action_clear">Rensa</string>
     <string name="label_send_key">Skicka</string>
     <string name="label_search_key">Sök</string>
     <string name="label_done_key">Klar</string>

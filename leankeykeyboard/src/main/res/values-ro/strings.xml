@@ -6,6 +6,11 @@
         () [] *</string>
     <string name="label_go_key">Merge</string>
     <string name="label_next_key">Următorul</string>
+    <string name="action_select_all">Selectează tot</string>
+    <string name="action_copy">Copiază</string>
+    <string name="action_cut">Decupează</string>
+    <string name="action_paste">Lipește</string>
+    <string name="action_clear">Șterge</string>
     <string name="label_send_key">Trimite</string>
     <string name="label_search_key">Căutare</string>
     <string name="label_done_key">Terminat</string>

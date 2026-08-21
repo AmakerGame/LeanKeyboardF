@@ -7,6 +7,11 @@
     </string>
     <string name="label_go_key">Go</string>
     <string name="label_next_key">Next</string>
+    <string name="action_select_all">Select All</string>
+    <string name="action_copy">Copy</string>
+    <string name="action_cut">Cut</string>
+    <string name="action_paste">Paste</string>
+    <string name="action_clear">Clear</string>
     <string name="label_send_key">Send</string>
     <string name="label_search_key">Search</string>
     <string name="label_done_key">Done</string>

@@ -2,6 +2,11 @@
 <resources>
     <string name="label_go_key">Git</string>
     <string name="label_next_key">İleri</string>
+    <string name="action_select_all">Tümünü seç</string>
+    <string name="action_copy">Kopyala</string>
+    <string name="action_cut">Kes</string>
+    <string name="action_paste">Yapıştır</string>
+    <string name="action_clear">Temizle</string>
     <string name="label_send_key">Gönder</string>
     <string name="label_search_key">Ara</string>
     <string name="label_done_key">Bitti</string>

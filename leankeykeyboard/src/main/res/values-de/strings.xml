@@ -2,6 +2,11 @@
 <resources>
     <string name="label_go_key">Los</string>
     <string name="label_next_key">Weiter</string>
+    <string name="action_select_all">Alles auswählen</string>
+    <string name="action_copy">Kopieren</string>
+    <string name="action_cut">Ausschneiden</string>
+    <string name="action_paste">Einfügen</string>
+    <string name="action_clear">Löschen</string>
     <string name="label_send_key">Senden</string>
     <string name="label_search_key">Suchen</string>
     <string name="label_done_key">Fertig</string>

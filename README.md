@@ -36,10 +36,6 @@ LeanKeyboardF aims to extend the original project with additional tools for keyb
 
 ---
 
-### Fixed bugs
-
-*Currently none listed. Contributions are welcome.*
-
 ### Added features
 
 - Keyboard size: https://github.com/yuliskov/LeanKeyboard/issues/73
@@ -47,6 +43,7 @@ LeanKeyboardF aims to extend the original project with additional tools for keyb
 - Portuguese (Brazil) language: https://github.com/yuliskov/LeanKeyboard/issues/53
 - Portuguese (Portugal) language: https://github.com/yuliskov/LeanKeyboard/issues/80
 - New keyboard themes: Light, System (follows device theme), and Dynamic Color (Material You, Android 12+)
+- Clipboard action row (Select All, Copy, Cut, Paste, Clear) next to the keyboard, with icon buttons
 
 ---
 

@@ -2,6 +2,11 @@
 <resources>
     <string name="label_go_key">Старт</string>
     <string name="label_next_key">Напред</string>
+    <string name="action_select_all">Избери всичко</string>
+    <string name="action_copy">Копирай</string>
+    <string name="action_cut">Изрежи</string>
+    <string name="action_paste">Постави</string>
+    <string name="action_clear">Изчисти</string>
     <string name="label_send_key">Изпращане</string>
     <string name="label_search_key">Търсене</string>
     <string name="label_done_key">Готово</string>

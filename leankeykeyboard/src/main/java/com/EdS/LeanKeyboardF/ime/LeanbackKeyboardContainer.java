@@ -84,6 +84,8 @@ public class LeanbackKeyboardContainer {
     public static final int DIRECTION_RIGHT = 4;
     private Keyboard mAbcKeyboard;
     private Button mActionButtonView;
+    private View mClipboardContainer;
+    private View[] mClipboardButtons = new View[5];
     private final float mAlphaIn;
     private final float mAlphaOut;
     private boolean mAutoEnterSpaceEnabled;
@@ -221,6 +223,12 @@ public class LeanbackKeyboardContainer {
         mMainKeyboardView = (LeanbackKeyboardView) mRootView.findViewById(R.id.main_keyboard);
         mVoiceButtonView = (RecognizerView) mRootView.findViewById(R.id.voice);
         mActionButtonView = (Button) mRootView.findViewById(R.id.enter);
+        mClipboardContainer = mRootView.findViewById(R.id.action_buttons);
+        mClipboardButtons[0] = mRootView.findViewById(R.id.action_clear);
+        mClipboardButtons[1] = mRootView.findViewById(R.id.action_select_all);
+        mClipboardButtons[2] = mRootView.findViewById(R.id.action_copy);
+        mClipboardButtons[3] = mRootView.findViewById(R.id.action_cut);
+        mClipboardButtons[4] = mRootView.findViewById(R.id.action_paste);
         mSelector = mRootView.findViewById(R.id.selector);
         mKeySelector = mRootView.findViewById(R.id.key_selector);
         mKeySelectorSquare = ContextCompat.getDrawable(mContext, R.drawable.key_selector_square);
@@ -517,6 +525,10 @@ public class LeanbackKeyboardContainer {
                     LeanbackUtils.sendAccessibilityEvent(mActionButtonView, true);
                     dismissMiniKeyboard();
                     break;
+                case KeyFocus.TYPE_CLIPBOARD:
+                    LeanbackUtils.sendAccessibilityEvent(mClipboardButtons[focus.index], true);
+                    dismissMiniKeyboard();
+                    break;
                 case KeyFocus.TYPE_SUGGESTION:
                     dismissMiniKeyboard();
             }
@@ -634,6 +646,8 @@ public class LeanbackKeyboardContainer {
     public boolean getBestFocus(final Float x, final Float y, final KeyFocus focus) {
         offsetRect(mRect, mActionButtonView);
         int actionLeft = mRect.left;
+        offsetRect(mRect, mClipboardContainer);
+        int clipboardLeft = mRect.left;
         offsetRect(mRect, mMainKeyboardView);
         int keyboardTop = mRect.top;
         Float newX = x;
@@ -667,6 +681,11 @@ public class LeanbackKeyboardContainer {
             offsetRect(mRect, mActionButtonView);
             configureFocus(focus, mRect, 0, KeyFocus.TYPE_ACTION);
             return true;
+        } else if (newX > (float) clipboardLeft) {
+            int nearestIdx = findNearestClipboardButton(newY);
+            offsetRect(mRect, mClipboardButtons[nearestIdx]);
+            configureFocus(focus, mRect, nearestIdx, KeyFocus.TYPE_CLIPBOARD);
+            return true;
         } else {
             mX = newX;
             mY = newY;
@@ -678,6 +697,24 @@ public class LeanbackKeyboardContainer {
             configureFocus(focus, mRect, keyIdx, key, 0);
             return true;
         }
+    }
+
+    // Picks whichever of the 5 clipboard action buttons (Clear, Select
+    // All, Copy, Cut, Paste) is vertically closest to the given y - used
+    // so pressing right from any keyboard row lands on the button at
+    // roughly the same height, rather than always the same one.
+    private int findNearestClipboardButton(float y) {
+        int nearestIdx = 0;
+        int nearestDist = Integer.MAX_VALUE;
+        for (int i = 0; i < mClipboardButtons.length; i++) {
+            offsetRect(mRect, mClipboardButtons[i]);
+            int dist = Math.abs((int) y - mRect.centerY());
+            if (dist < nearestDist) {
+                nearestDist = dist;
+                nearestIdx = i;
+            }
+        }
+        return nearestIdx;
     }
 
     public LeanbackKeyboardContainer.KeyFocus getCurrFocus() {
@@ -703,6 +740,19 @@ public class LeanbackKeyboardContainer {
     }
 
     public void updateCyclicFocus(int dir, KeyFocus oldFocus, KeyFocus newFocus) {
+        // Moving away from one of the 5 clipboard buttons already has its
+        // own correct left/right/up/down handling (see
+        // getNextFocusInDirection's TYPE_CLIPBOARD case) - in particular,
+        // pressing right onto the Enter/submit button from there is
+        // intentional. The same-row heuristic below predates the
+        // clipboard column and only really knows about the old single
+        // action button, so it can misjudge these buttons as "not on the
+        // same row" and bounce focus back into the keyboard instead.
+        // Leave newFocus exactly as already computed in that case.
+        if (oldFocus.type == KeyFocus.TYPE_CLIPBOARD) {
+            return;
+        }
+
         if (oldFocus.equals(newFocus) || LeanbackUtils.isSubmitButton(newFocus)) {
             if (LeanKeyPreferences.instance(mContext).isCyclicNavigationEnabled()) {
                 if (dir == DIRECTION_RIGHT || dir == DIRECTION_LEFT) {
@@ -774,7 +824,7 @@ public class LeanbackKeyboardContainer {
                     }
                 } else if ((direction & DIRECTION_RIGHT) != 0) {
                     if ((key.edgeFlags & Keyboard.EDGE_RIGHT) != 0) {
-                        offsetRect(mRect, mActionButtonView);
+                        offsetRect(mRect, mClipboardContainer);
                         centerX = (float) mRect.centerX();
                     } else {
                         centerX = (float) startFocus.rect.right + centerDelta;
@@ -796,14 +846,46 @@ public class LeanbackKeyboardContainer {
             default:
                 break;
             case KeyFocus.TYPE_ACTION:
-                offsetRect(mRect, mMainKeyboardView);
+                offsetRect(mRect, mClipboardContainer);
                 if ((direction & DIRECTION_LEFT) != 0) {
-                    return getBestFocus((float) mRect.right, null, nextFocus);
+                    return getBestFocus((float) mRect.centerX(), (float) startFocus.rect.centerY(), nextFocus);
                 }
 
                 if ((direction & DIRECTION_UP) != 0) {
                     offsetRect(mRect, mSuggestions);
                     return getBestFocus((float) startFocus.rect.centerX(), (float) mRect.centerY(), nextFocus);
+                }
+                break;
+            case KeyFocus.TYPE_CLIPBOARD:
+                if ((direction & DIRECTION_LEFT) != 0) {
+                    offsetRect(mRect, mMainKeyboardView);
+                    return getBestFocus((float) mRect.right, (float) startFocus.rect.centerY(), nextFocus);
+                }
+
+                if ((direction & DIRECTION_RIGHT) != 0) {
+                    offsetRect(mRect, mActionButtonView);
+                    return getBestFocus((float) mRect.centerX(), (float) startFocus.rect.centerY(), nextFocus);
+                }
+
+                if ((direction & DIRECTION_UP) != 0) {
+                    if (startFocus.index > 0) {
+                        int newIdx = startFocus.index - 1;
+                        offsetRect(mRect, mClipboardButtons[newIdx]);
+                        configureFocus(nextFocus, mRect, newIdx, KeyFocus.TYPE_CLIPBOARD);
+                        return true;
+                    }
+
+                    offsetRect(mRect, mSuggestions);
+                    return getBestFocus((float) startFocus.rect.centerX(), (float) mRect.centerY(), nextFocus);
+                }
+
+                if ((direction & DIRECTION_DOWN) != 0) {
+                    if (startFocus.index < mClipboardButtons.length - 1) {
+                        int newIdx = startFocus.index + 1;
+                        offsetRect(mRect, mClipboardButtons[newIdx]);
+                        configureFocus(nextFocus, mRect, newIdx, KeyFocus.TYPE_CLIPBOARD);
+                        return true;
+                    }
                 }
                 break;
             case KeyFocus.TYPE_SUGGESTION:
@@ -1292,6 +1374,7 @@ public class LeanbackKeyboardContainer {
 
     public static class KeyFocus {
         public static final int TYPE_ACTION = 2;
+        public static final int TYPE_CLIPBOARD = 4;
         public static final int TYPE_INVALID = -1;
         public static final int TYPE_MAIN = 0;
         public static final int TYPE_SUGGESTION = 3;

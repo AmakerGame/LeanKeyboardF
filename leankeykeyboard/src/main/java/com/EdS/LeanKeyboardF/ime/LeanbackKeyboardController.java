@@ -168,6 +168,9 @@ public class LeanbackKeyboardController implements LeanbackKeyboardContainer.Voi
                     mInputListener.onEntry(InputListener.ENTRY_TYPE_ACTION, 0, null);
                     // mContext.hideWindow(); // SmartYouTubeTV fix: force hide keyboard
                     return;
+                case KeyFocus.TYPE_CLIPBOARD: // User presses Clear, Select All, Copy, Cut, or Paste
+                    mInputListener.onEntry(InputListener.ENTRY_TYPE_CLIPBOARD, focus.index, null);
+                    return;
                 case KeyFocus.TYPE_SUGGESTION:
                     mInputListener.onEntry(InputListener.ENTRY_TYPE_SUGGESTION, 0, mContainer.getSuggestionText(focus.index));
                     return;
@@ -887,6 +890,7 @@ public class LeanbackKeyboardController implements LeanbackKeyboardContainer.Voi
     public interface InputListener {
         int ENTRY_TYPE_ACTION = 5;
         int ENTRY_TYPE_BACKSPACE = 1;
+        int ENTRY_TYPE_CLIPBOARD = 9;
         int ENTRY_TYPE_DISMISS = 7;
         int ENTRY_TYPE_LEFT = 3;
         int ENTRY_TYPE_RIGHT = 4;

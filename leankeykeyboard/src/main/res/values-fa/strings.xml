@@ -2,6 +2,11 @@
 <resources>
     <string name="label_go_key">برو</string>
     <string name="label_next_key">بعدی</string>
+    <string name="action_select_all">انتخاب همه</string>
+    <string name="action_copy">کپی</string>
+    <string name="action_cut">برش</string>
+    <string name="action_paste">چسباندن</string>
+    <string name="action_clear">پاک کردن</string>
     <string name="label_send_key">ارسال</string>
     <string name="label_search_key">جستجو</string>
     <string name="label_done_key">انجام شد</string>

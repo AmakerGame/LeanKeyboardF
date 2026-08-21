@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- "Select all": four corner brackets, viewfinder-style. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="2"
+        android:strokeLineCap="square"
+        android:pathData="M4,4 L8,4 M4,4 L4,8 M20,4 L16,4 M20,4 L20,8 M4,20 L8,20 M4,20 L4,16 M20,20 L16,20 M20,20 L20,16" />
+</vector>

@@ -8,9 +8,11 @@ import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.ImageViewCompat;
 import com.EdS.LeanKeyboardF.ime.LeanbackKeyboardView;
 import com.EdS.LeanKeyboardF.utils.LeanKeyPreferences;
 import com.EdS.LeanKeyboardF.R;
@@ -156,6 +158,18 @@ public class ThemeManager {
 
         if (keyboardView != null) {
             keyboardView.setKeyTextColor(ContextCompat.getColor(mContext, keyTextColor));
+        }
+
+        int[] actionButtonIds = {
+                R.id.action_clear, R.id.action_select_all, R.id.action_copy, R.id.action_cut, R.id.action_paste
+        };
+
+        for (int id : actionButtonIds) {
+            ImageButton actionButton = mRootView.findViewById(id);
+
+            if (actionButton != null) {
+                ImageViewCompat.setImageTintList(actionButton, android.content.res.ColorStateList.valueOf(ContextCompat.getColor(mContext, keyTextColor)));
+            }
         }
     }
 

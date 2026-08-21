@@ -7,6 +7,11 @@
     </string>
     <string name="label_go_key">Gaan</string>
     <string name="label_next_key">Volgende</string>
+    <string name="action_select_all">Alles selecteren</string>
+    <string name="action_copy">Kopiëren</string>
+    <string name="action_cut">Knippen</string>
+    <string name="action_paste">Plakken</string>
+    <string name="action_clear">Wissen</string>
     <string name="label_send_key">Verzenden</string>
     <string name="label_search_key">Zoeken</string>
     <string name="label_done_key">Gereed</string>

@@ -2,6 +2,11 @@
 <resources>
     <string name="label_go_key">Μετάβαση</string>
     <string name="label_next_key">Επόμενο</string>
+    <string name="action_select_all">Επιλογή όλων</string>
+    <string name="action_copy">Αντιγραφή</string>
+    <string name="action_cut">Αποκοπή</string>
+    <string name="action_paste">Επικόλληση</string>
+    <string name="action_clear">Εκκαθάριση</string>
     <string name="label_send_key">Αποστολή</string>
     <string name="label_search_key">Αναζήτηση</string>
     <string name="label_done_key">Τέλος</string>
