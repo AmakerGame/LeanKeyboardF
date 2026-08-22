@@ -65,6 +65,9 @@
     <string name="show_launcher_icon_desc">Başlatıcı simgesini göster</string>
     <string name="enable_cyclic_navigation">Çevrimsel gezinme</string>
     <string name="enable_cyclic_navigation_desc">Klavye ile döngüsel gezinme</string>
+    <string name="clipboard_buffer">Pano arabelleği</string>
+    <string name="clipboard_buffer_desc">Bu klavyeyle kopyalanan veya kesilen son öğeler</string>
+    <string name="clear_clipboard_buffer">Temizle</string>
     <!--  END: autotranslated strings  -->
     <string name="about_original">Original program</string>
     <string name="about_this_program">This program</string>

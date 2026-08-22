@@ -6,7 +6,8 @@
     <string name="action_copy">Копіювати</string>
     <string name="action_cut">Вирізати</string>
     <string name="action_paste">Вставити</string>
-    <string name="action_clear">Очистити</string>
+        <string name="keyboardview_keycode_clipboard">Буфер</string>
+<string name="action_clear">Очистити</string>
     <string name="label_send_key">Надіслати</string>
     <string name="label_search_key">Пошук</string>
     <string name="label_done_key">Готово</string>
@@ -57,6 +58,9 @@
     <string name="show_launcher_icon_desc">Відображати іконку лаунчера</string>
     <string name="enable_cyclic_navigation">Циклічна навігація</string>
     <string name="enable_cyclic_navigation_desc">Циклічна навігація по клавіатурі</string>
+    <string name="clipboard_buffer">Буфер обміну</string>
+    <string name="clipboard_buffer_desc">Останні елементи, скопійовані або вирізані цією клавіатурою</string>
+    <string name="clear_clipboard_buffer">Очистити</string>
     <string name="about_original">Оригінальна програма</string>
     <string name="about_this_program">Ця програма</string>
     <string name="settings">Налаштування</string>

@@ -65,6 +65,9 @@
     <string name="show_launcher_icon_desc">Afficher l\'icône du lanceur</string>
     <string name="enable_cyclic_navigation">Navigation cyclique</string>
     <string name="enable_cyclic_navigation_desc">Navigation cyclique via le clavier</string>
+    <string name="clipboard_buffer">Historique du presse-papiers</string>
+    <string name="clipboard_buffer_desc">Éléments récemment copiés ou coupés avec ce clavier</string>
+    <string name="clear_clipboard_buffer">Effacer</string>
     <!--  END: autotranslated strings  -->
     <string name="about_original">Programme original</string>
     <string name="about_this_program">Ce programme</string>

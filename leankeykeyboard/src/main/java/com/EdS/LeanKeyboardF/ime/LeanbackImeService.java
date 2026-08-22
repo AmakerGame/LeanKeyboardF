@@ -17,8 +17,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.CompletionInfo;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.ExtractedText;
+import android.view.inputmethod.ExtractedTextRequest;
 import android.view.inputmethod.InputConnection;
-import androidx.core.text.BidiFormatter;
 import com.EdS.LeanKeyboardF.ime.LeanbackKeyboardController.InputListener;
 import com.EdS.LeanKeyboardF.utils.LeanKeyPreferences;
 
@@ -101,6 +102,18 @@ public class LeanbackImeService extends KeyMapperImeService {
 
     }
 
+    // Called right before performContextMenuAction(copy/cut) actually
+    // runs, while the selection still exists, so the copied/cut text can
+    // be added to the "Буфер" history (not just the single system
+    // clipboard slot the OS itself keeps).
+    private void captureSelectionToClipboardHistory(InputConnection connection) {
+        CharSequence selected = connection.getSelectedText(0);
+
+        if (selected != null && selected.length() > 0) {
+            LeanKeyPreferences.instance(this).addClipboardHistoryItem(selected.toString());
+        }
+    }
+
     private void handleTextEntry(final int type, final int keyCode, final CharSequence text) {
         final InputConnection connection = getCurrentInputConnection();
         if (connection != null) {
@@ -152,6 +165,17 @@ public class LeanbackImeService extends KeyMapperImeService {
 
                     updateSuggestions = false;
                     break;
+                case InputListener.ENTRY_TYPE_BUFFER_SUGGESTION:
+                    // Picking an item from the "Буфер" history list -
+                    // unlike a normal word suggestion, this must NOT
+                    // delete/replace whatever is around the cursor, it
+                    // just inserts the picked text at the current
+                    // position (like a real paste).
+                    clearSuggestionsDelayed();
+                    connection.commitText(text, 1);
+                    mEnterSpaceBeforeCommitting = true;
+                    updateSuggestions = false;
+                    break;
                 case InputListener.ENTRY_TYPE_CLIPBOARD:
                     // keyCode is which button was pressed: 0=Clear,
                     // 1=Select All, 2=Copy, 3=Cut, 4=Paste - matches the
@@ -159,16 +183,28 @@ public class LeanbackImeService extends KeyMapperImeService {
                     // action_buttons column.
                     switch (keyCode) {
                         case 0: // Clear - wipes the whole field, not just around the cursor
-                            connection.deleteSurroundingText(Integer.MAX_VALUE, Integer.MAX_VALUE);
+                            // Integer.MAX_VALUE crashes some apps' InputConnection
+                            // implementations (internal length math overflows) -
+                            // especially reliably when there's an active selection
+                            // already (e.g. right after Select All). Replace any
+                            // selection first, then delete the rest with a large
+                            // but bounded number instead of MAX_VALUE.
+                            CharSequence selectedText = connection.getSelectedText(0);
+                            if (selectedText != null && selectedText.length() > 0) {
+                                connection.commitText("", 1);
+                            }
+                            connection.deleteSurroundingText(9999, 9999);
                             mEnterSpaceBeforeCommitting = false;
                             break;
                         case 1: // Select All
                             connection.performContextMenuAction(android.R.id.selectAll);
                             break;
                         case 2: // Copy
+                            captureSelectionToClipboardHistory(connection);
                             connection.performContextMenuAction(android.R.id.copy);
                             break;
                         case 3: // Cut
+                            captureSelectionToClipboardHistory(connection);
                             connection.performContextMenuAction(android.R.id.cut);
                             mEnterSpaceBeforeCommitting = false;
                             break;
@@ -185,68 +221,34 @@ public class LeanbackImeService extends KeyMapperImeService {
                     break;
                 case InputListener.ENTRY_TYPE_LEFT:
                 case InputListener.ENTRY_TYPE_RIGHT:
-                    BidiFormatter formatter = BidiFormatter.getInstance();
+                    // getTextBeforeCursor(1000, ...)'s returned length is
+                    // capped at 1000 by the Android API itself, no matter
+                    // how far the real cursor position is - past that
+                    // point every arrow press recomputed roughly the same
+                    // "around 1000" index (yuliskov/LeanKeyboard#51).
+                    // ExtractedText.selectionStart/End give the real
+                    // absolute position with no such cap.
+                    ExtractedText extractedText = connection.getExtractedText(new ExtractedTextRequest(), 0);
 
-                    CharSequence textBeforeCursor = connection.getTextBeforeCursor(1000, 0);
-                    int lenBefore = 0;
-                    boolean isRtlBefore = false;
-                    //int rtlLenBefore = 0;
-                    if (textBeforeCursor != null) {
-                        lenBefore = textBeforeCursor.length();
-                        isRtlBefore = formatter.isRtl(textBeforeCursor);
-                        //rtlLenBefore = LeanbackUtils.getRtlLenBeforeCursor(textBeforeCursor);
-                    }
+                    if (extractedText != null) {
+                        int selStart = extractedText.selectionStart;
+                        int selEnd = extractedText.selectionEnd;
+                        int textLength = extractedText.text != null ? extractedText.text.length() : selEnd;
 
-                    CharSequence textAfterCursor = connection.getTextAfterCursor(1000, 0);
-                    int lenAfter = 0;
-                    //int rtlLenAfter = 0;
-                    boolean isRtlAfter = false;
-                    if (textAfterCursor != null) {
-                        lenAfter = textAfterCursor.length();
-                        isRtlAfter = formatter.isRtl(textAfterCursor);
-                        //rtlLenAfter = LeanbackUtils.getRtlLenAfterCursor(textAfterCursor);
-                    }
-
-                    int index = lenBefore;
-                    if (type == InputListener.ENTRY_TYPE_LEFT) {
-                        if (lenBefore > 0) {
-                            if (!isRtlBefore) {
-                                index = lenBefore - 1;
-                            } else {
-                                if (lenAfter == 0) {
-                                    index = 1;
-                                } else if (lenAfter == 1) {
-                                    index = 0;
-                                } else {
-                                    index = lenBefore + 1;
-                                }
-                            }
+                        int newIndex;
+                        if (type == InputListener.ENTRY_TYPE_LEFT) {
+                            int from = Math.min(selStart, selEnd);
+                            newIndex = Math.max(0, from - 1);
+                        } else {
+                            int from = Math.max(selStart, selEnd);
+                            newIndex = Math.min(textLength, from + 1);
                         }
 
-                        //Log.d(TAG, String.format("direction key: before: lenBefore=%s, lenAfter=%s, rtlLenBefore=%s, rtlLenAfter=%s", lenBefore, lenAfter, rtlLenBefore, rtlLenAfter));
-                        Log.d(TAG, String.format("direction key: before: lenBefore=%s, lenAfter=%s, isRtlBefore=%s", lenBefore, lenAfter, isRtlBefore));
-                    } else {
-                        if (lenAfter > 0) {
-                            if (!isRtlAfter) {
-                                index = lenBefore + 1;
-                            } else {
-                                if (lenBefore == 0) {
-                                    index = lenAfter - 1;
-                                } else if (lenBefore == 1) {
-                                    index = lenAfter + 1;
-                                } else {
-                                    index = lenBefore - 1;
-                                }
-                            }
-                        }
+                        Log.d(TAG, "direction key: index: " + newIndex);
 
-                        //Log.d(TAG, String.format("direction key: after: lenBefore=%s, lenAfter=%s, rtlLenBefore=%s, rtlLenAfter=%s", lenBefore, lenAfter, rtlLenBefore, rtlLenAfter));
-                        Log.d(TAG, String.format("direction key: after: lenBefore=%s, lenAfter=%s, isRtlAfter=%s", lenBefore, lenAfter, isRtlAfter));
+                        connection.setSelection(newIndex, newIndex);
                     }
 
-                    Log.d(TAG, "direction key: index: " + index);
-
-                    connection.setSelection(index, index);
                     updateSuggestions = true;
                     break;
                 case InputListener.ENTRY_TYPE_DISMISS:

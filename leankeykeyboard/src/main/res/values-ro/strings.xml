@@ -67,6 +67,9 @@
     <string name="show_launcher_icon_desc">Afișează pictograma lansatorului</string>
     <string name="enable_cyclic_navigation">Navigare ciclică</string>
     <string name="enable_cyclic_navigation_desc">Navigare ciclică prin tastatură</string>
+    <string name="clipboard_buffer">Istoric clipboard</string>
+    <string name="clipboard_buffer_desc">Elemente recente copiate sau decupate cu această tastatură</string>
+    <string name="clear_clipboard_buffer">Șterge</string>
     <string name="about_original">Original program</string>
     <string name="about_this_program">This program</string>
     <string name="settings">Settings</string>

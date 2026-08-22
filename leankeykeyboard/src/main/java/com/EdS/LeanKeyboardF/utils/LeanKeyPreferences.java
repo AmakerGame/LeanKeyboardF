@@ -24,6 +24,7 @@ public final class LeanKeyPreferences {
     private static final String PHYSICAL_KEYBOARD_MODE = "physicalKeyboardMode";
     private static final String FLOATING_KEYBOARD = "floatingKeyboard";
     private static final String KEYBOARD_SIZE_LEVEL = "keyboardSizeLevel";
+    private static final String CLIPBOARD_HISTORY = "clipboardHistory";
     private static LeanKeyPreferences sInstance;
     private final Context mContext;
     private SharedPreferences mPrefs;
@@ -158,5 +159,52 @@ public final class LeanKeyPreferences {
 
     public void decreaseKeyboardSize() {
         setKeyboardSizeLevel(getKeyboardSizeLevel() - 1);
+    }
+
+    // --- Clipboard buffer history (Копіювати/Вирізати feed this; the
+    // "Буфер" key on the keyboard itself shows them for picking) -------
+    private static final int CLIPBOARD_HISTORY_MAX_ITEMS = 5;
+
+    public void addClipboardHistoryItem(String text) {
+        if (text == null || text.trim().isEmpty()) {
+            return;
+        }
+
+        java.util.List<String> history = getClipboardHistory();
+        history.remove(text); // move to front if already present, no duplicates
+        history.add(0, text);
+
+        while (history.size() > CLIPBOARD_HISTORY_MAX_ITEMS) {
+            history.remove(history.size() - 1);
+        }
+
+        org.json.JSONArray array = new org.json.JSONArray();
+        for (String item : history) {
+            array.put(item);
+        }
+
+        mPrefs.edit().putString(CLIPBOARD_HISTORY, array.toString()).apply();
+    }
+
+    public void clearClipboardHistory() {
+        mPrefs.edit().remove(CLIPBOARD_HISTORY).apply();
+    }
+
+    public java.util.List<String> getClipboardHistory() {
+        java.util.List<String> history = new java.util.ArrayList<>();
+        String json = mPrefs.getString(CLIPBOARD_HISTORY, null);
+
+        if (json != null) {
+            try {
+                org.json.JSONArray array = new org.json.JSONArray(json);
+                for (int i = 0; i < array.length(); i++) {
+                    history.add(array.getString(i));
+                }
+            } catch (org.json.JSONException e) {
+                // corrupted/old data - just start fresh next time something is copied
+            }
+        }
+
+        return history;
     }
 }

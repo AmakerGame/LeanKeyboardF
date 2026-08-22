@@ -172,7 +172,13 @@ public class LeanbackKeyboardController implements LeanbackKeyboardContainer.Voi
                     mInputListener.onEntry(InputListener.ENTRY_TYPE_CLIPBOARD, focus.index, null);
                     return;
                 case KeyFocus.TYPE_SUGGESTION:
-                    mInputListener.onEntry(InputListener.ENTRY_TYPE_SUGGESTION, 0, mContainer.getSuggestionText(focus.index));
+                    if (mContainer.isShowingClipboardBuffer()) {
+                        CharSequence fullText = mContainer.getClipboardBufferText(focus.index);
+                        mInputListener.onEntry(InputListener.ENTRY_TYPE_BUFFER_SUGGESTION, focus.index, fullText);
+                        mContainer.hideClipboardBuffer();
+                    } else {
+                        mInputListener.onEntry(InputListener.ENTRY_TYPE_SUGGESTION, 0, mContainer.getSuggestionText(focus.index));
+                    }
                     return;
                 default:
                     Key key = mContainer.getKey(focus.type, focus.index);
@@ -890,6 +896,7 @@ public class LeanbackKeyboardController implements LeanbackKeyboardContainer.Voi
     public interface InputListener {
         int ENTRY_TYPE_ACTION = 5;
         int ENTRY_TYPE_BACKSPACE = 1;
+        int ENTRY_TYPE_BUFFER_SUGGESTION = 10;
         int ENTRY_TYPE_CLIPBOARD = 9;
         int ENTRY_TYPE_DISMISS = 7;
         int ENTRY_TYPE_LEFT = 3;

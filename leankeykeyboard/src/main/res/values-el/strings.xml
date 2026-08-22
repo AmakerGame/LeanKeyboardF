@@ -65,6 +65,9 @@
     <string name="show_launcher_icon_desc">Εμφάνιση εικονιδίου εκκίνησης</string>
     <string name="enable_cyclic_navigation">Κυκλική πλοήγηση</string>
     <string name="enable_cyclic_navigation_desc">Κυκλική πλοήγηση μέσω πληκτρολογίου</string>
+    <string name="clipboard_buffer">Ιστορικό προχείρου</string>
+    <string name="clipboard_buffer_desc">Πρόσφατα στοιχεία που αντιγράφηκαν ή αποκόπηκαν με αυτό το πληκτρολόγιο</string>
+    <string name="clear_clipboard_buffer">Εκκαθάριση</string>
     <!--  END: autotranslated strings  -->
     <string name="about_original">Original program</string>
     <string name="about_this_program">This program</string>

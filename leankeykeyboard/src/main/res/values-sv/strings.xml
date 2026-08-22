@@ -65,6 +65,9 @@
     <string name="show_launcher_icon_desc">Visa start-ikonen</string>
     <string name="enable_cyclic_navigation">Сyklisk navigering</string>
     <string name="enable_cyclic_navigation_desc">Сyklisk navigering genom tangentbordet</string>
+    <string name="clipboard_buffer">Urklippshistorik</string>
+    <string name="clipboard_buffer_desc">Senaste objekten som kopierats eller klippts ut med detta tangentbord</string>
+    <string name="clear_clipboard_buffer">Rensa</string>
     <!--  END: autotranslated strings  -->
     <string name="about_original">Original program</string>
     <string name="about_this_program">This program</string>

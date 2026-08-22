@@ -19,6 +19,7 @@
     <dimen name="enter_key_height">32.0dip</dimen>
     <dimen name="action_button_width">36.0dip</dimen>
     <dimen name="action_button_padding">4.0dip</dimen>
+    <dimen name="action_buttons_top_offset">1.0dip</dimen>
     <dimen name="enter_key_font_size">18.0sp</dimen>
     <dimen name="enter_key_padding_horizontal">16.0dip</dimen>
     <!-- Keyboard other -->

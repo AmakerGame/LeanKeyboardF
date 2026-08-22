@@ -66,6 +66,7 @@ public class LeanbackKeyboardView extends FrameLayout {
     private final int mInactiveMiniKbAlpha;
     private ImageView[] mKeyImageViews;
     private int mKeyTextColor;
+    private boolean mClipboardBufferActive = false;
     private Keyboard mKeyboard;
     private KeyHolder[] mKeys;
     private boolean mMiniKeyboardOnScreen;
@@ -237,7 +238,9 @@ public class LeanbackKeyboardView extends FrameLayout {
             // become nearly invisible - tint them with the same color
             // used for letter/number key labels so they follow whatever
             // theme is active.
-            key.icon.setColorFilter(new PorterDuffColorFilter(mKeyTextColor, PorterDuff.Mode.SRC_IN));
+            boolean isActiveClipboardKey = mClipboardBufferActive && key.codes.length > 0 && key.codes[0] == KEYCODE_CLIPBOARD;
+            int iconTintColor = isActiveClipboardKey ? 0xFF4CAF50 /* green */ : mKeyTextColor;
+            key.icon.setColorFilter(new PorterDuffColorFilter(iconTintColor, PorterDuff.Mode.SRC_IN));
 
             canvas.translate((float) dx, (float) dy);
             key.icon.setBounds(0, 0, iconWidth, iconHeight);
@@ -645,5 +648,13 @@ public class LeanbackKeyboardView extends FrameLayout {
 
     public void setKeyTextColor(int color) {
         mKeyTextColor = color;
+    }
+
+    // Toggled by the "Буфер" key (KEYCODE_CLIPBOARD): while active, that
+    // key's own icon is tinted green regardless of theme, to show its
+    // history list is currently displayed in the suggestions row.
+    public void setClipboardBufferActive(boolean active) {
+        mClipboardBufferActive = active;
+        invalidateAllKeys();
     }
 }

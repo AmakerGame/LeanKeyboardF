@@ -65,6 +65,9 @@
     <string name="show_launcher_icon_desc">Prikazi zacetno ikono</string>
     <string name="enable_cyclic_navigation">Ciklicna navigacija</string>
     <string name="enable_cyclic_navigation_desc">Ciklicno krmarjenje po tipkovnici</string>
+    <string name="clipboard_buffer">Medpomnilnik odložišča</string>
+    <string name="clipboard_buffer_desc">Nedavni elementi, kopirani ali izrezani s to tipkovnico</string>
+    <string name="clear_clipboard_buffer">Počisti</string>
     <!--  END: autotranslated strings  -->
     <string name="about_original">Original program</string>
     <string name="about_this_program">This program</string>

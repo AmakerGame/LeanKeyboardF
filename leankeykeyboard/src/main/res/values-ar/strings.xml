@@ -67,6 +67,9 @@
     <string name="show_launcher_icon_desc">إظهار أيقونة المشغل</string>
     <string name="enable_cyclic_navigation">التنقل الدوري</string>
     <string name="enable_cyclic_navigation_desc">التنقل الدوري من خلال لوحة المفاتيح</string>
+    <string name="clipboard_buffer">مخزن الحافظة</string>
+    <string name="clipboard_buffer_desc">العناصر الأخيرة المنسوخة أو المقصوصة بهذه اللوحة</string>
+    <string name="clear_clipboard_buffer">مسح</string>
     <!--  END: autotranslated strings  -->
     <string name="about_original">Original program</string>
     <string name="about_this_program">This program</string>

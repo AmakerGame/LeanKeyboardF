@@ -65,6 +65,9 @@
     <string name="show_launcher_icon_desc">Mostra l\'icona di avvio</string>
     <string name="enable_cyclic_navigation">Navigazione ciclica</string>
     <string name="enable_cyclic_navigation_desc">Navigazione ciclica tramite tastiera</string>
+    <string name="clipboard_buffer">Buffer degli appunti</string>
+    <string name="clipboard_buffer_desc">Elementi recenti copiati o tagliati con questa tastiera</string>
+    <string name="clear_clipboard_buffer">Cancella</string>
     <!--  END: autotranslated strings  -->
     <string name="about_original">Programma originale</string>
     <string name="about_this_program">Questo programma</string>

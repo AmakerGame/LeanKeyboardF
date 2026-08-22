@@ -8,7 +8,8 @@
     <string name="action_copy">Copy</string>
     <string name="action_cut">Cut</string>
     <string name="action_paste">Paste</string>
-    <string name="action_clear">Clear</string>
+        <string name="keyboardview_keycode_clipboard">Buffer</string>
+<string name="action_clear">Clear</string>
     <string name="label_send_key">‏‮Send‬‏</string>
     <string name="label_search_key">‏‮Search‬‏</string>
     <string name="label_done_key">‏‮Done‬‏</string>
@@ -44,4 +45,7 @@
     <string name="size_normal">Normal</string>
     <string name="size_large">Large</string>
     <string name="size_xlarge">Extra large</string>
+    <string name="clipboard_buffer">Clipboard buffer</string>
+    <string name="clipboard_buffer_desc">Recent items copied or cut with this keyboard</string>
+    <string name="clear_clipboard_buffer">Clear</string>
 </resources>

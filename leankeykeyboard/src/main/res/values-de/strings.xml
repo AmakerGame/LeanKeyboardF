@@ -6,7 +6,8 @@
     <string name="action_copy">Kopieren</string>
     <string name="action_cut">Ausschneiden</string>
     <string name="action_paste">Einfügen</string>
-    <string name="action_clear">Löschen</string>
+        <string name="keyboardview_keycode_clipboard">Zwischenspeicher</string>
+<string name="action_clear">Löschen</string>
     <string name="label_send_key">Senden</string>
     <string name="label_search_key">Suchen</string>
     <string name="label_done_key">Fertig</string>
@@ -67,4 +68,7 @@
     <string name="size_normal">Normal</string>
     <string name="size_large">Groß</string>
     <string name="size_xlarge">Sehr groß</string>
+    <string name="clipboard_buffer">Zwischenspeicher</string>
+    <string name="clipboard_buffer_desc">Zuletzt mit dieser Tastatur kopierte oder ausgeschnittene Elemente</string>
+    <string name="clear_clipboard_buffer">Löschen</string>
 </resources>

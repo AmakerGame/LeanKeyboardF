@@ -6,7 +6,8 @@
     <string name="action_copy">คัดลอก</string>
     <string name="action_cut">ตัด</string>
     <string name="action_paste">วาง</string>
-    <string name="action_clear">ล้าง</string>
+        <string name="keyboardview_keycode_clipboard">Buffer</string>
+<string name="action_clear">ล้าง</string>
     <string name="label_send_key">ส่ง</string>
     <string name="label_search_key">ค้นหา</string>
     <string name="label_done_key">เสร็จสิ้น</string>
@@ -42,4 +43,7 @@
     <string name="size_normal">Normal</string>
     <string name="size_large">Large</string>
     <string name="size_xlarge">Extra large</string>
+    <string name="clipboard_buffer">Clipboard buffer</string>
+    <string name="clipboard_buffer_desc">Recent items copied or cut with this keyboard</string>
+    <string name="clear_clipboard_buffer">Clear</string>
 </resources>

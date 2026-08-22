@@ -65,6 +65,9 @@
     <string name="show_launcher_icon_desc">Показване на иконата на стартовия панел</string>
     <string name="enable_cyclic_navigation">Циклична навигация</string>
     <string name="enable_cyclic_navigation_desc">Циклична навигация през клавиатурата</string>
+    <string name="clipboard_buffer">Буфер за обмен</string>
+    <string name="clipboard_buffer_desc">Последни елементи, копирани или изрязани с тази клавиатура</string>
+    <string name="clear_clipboard_buffer">Изчисти</string>
     <!--  END: autotranslated strings  -->
     <string name="about_original">Original program</string>
     <string name="about_this_program">This program</string>

@@ -68,6 +68,9 @@
     <string name="show_launcher_icon_desc">Toon het app-pictogram op de lijst met alle apps</string>
     <string name="enable_cyclic_navigation">Сyclisch navigeren</string>
     <string name="enable_cyclic_navigation_desc">Navigeer cyclisch met het toetsenbord</string>
+    <string name="clipboard_buffer">Klembordbuffer</string>
+    <string name="clipboard_buffer_desc">Recente items gekopieerd of geknipt met dit toetsenbord</string>
+    <string name="clear_clipboard_buffer">Wissen</string>
     <string name="about_original">Original program</string>
     <string name="about_this_program">This program</string>
     <string name="settings">Settings</string>

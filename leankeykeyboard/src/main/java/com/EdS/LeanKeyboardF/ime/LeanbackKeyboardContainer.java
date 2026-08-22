@@ -4,8 +4,6 @@ import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -86,6 +84,7 @@ public class LeanbackKeyboardContainer {
     private Button mActionButtonView;
     private View mClipboardContainer;
     private View[] mClipboardButtons = new View[5];
+    private boolean mShowingClipboardBuffer = false;
     private final float mAlphaIn;
     private final float mAlphaOut;
     private boolean mAutoEnterSpaceEnabled;
@@ -1301,8 +1300,25 @@ public class LeanbackKeyboardContainer {
     }
 
     public void updateSuggestions(ArrayList<String> suggestions) {
-        addUserInputToSuggestions(suggestions);
+        if (mShowingClipboardBuffer) {
+            mShowingClipboardBuffer = false;
+            mClipboardBufferFullText.clear();
 
+            if (mMainKeyboardView != null) {
+                mMainKeyboardView.setClipboardBufferActive(false);
+            }
+        }
+
+        addUserInputToSuggestions(suggestions);
+        populateSuggestionsViews(suggestions);
+    }
+
+    // Populates the suggestions row views from the given list, without
+    // addUserInputToSuggestions overwriting item 0 with whatever's
+    // currently being typed. Normal word suggestions go through
+    // updateSuggestions() above; the "Буфер" clipboard history uses this
+    // directly so its item order/text stays exactly what was given.
+    private void populateSuggestionsViews(List<String> suggestions) {
         int oldCount = mSuggestions.getChildCount();
         int newCount = suggestions.size();
         if (newCount < oldCount) {
@@ -1353,19 +1369,64 @@ public class LeanbackKeyboardContainer {
         switchToNextKeyboard();
     }
 
-    public void onClipboardClick(InputListener listener) {
-        ClipboardManager clipBoard = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+    // Max characters shown per item in the suggestions row when
+    // browsing the "Буфер" clipboard history, so long copied text
+    // doesn't overflow/break the row. The full, untruncated text is
+    // still what actually gets pasted - see mClipboardBufferFullText.
+    private static final int CLIPBOARD_BUFFER_DISPLAY_LIMIT = 14;
+    private List<String> mClipboardBufferFullText = new ArrayList<>();
 
-        if (clipBoard != null) {
-            ClipData clipData = clipBoard.getPrimaryClip();
-            if (clipData != null) {
-                ClipData.Item item = clipData.getItemAt(0);
-                String text = item.getText().toString();
-                if (listener != null) {
-                    listener.onEntry(InputListener.ENTRY_TYPE_STRING, LeanbackKeyboardView.NOT_A_KEY, text);
-                }
-            }
+    public void onClipboardClick(InputListener listener) {
+        if (mShowingClipboardBuffer) {
+            hideClipboardBuffer();
+        } else {
+            showClipboardBuffer();
         }
+    }
+
+    private void showClipboardBuffer() {
+        List<String> history = LeanKeyPreferences.instance(mContext).getClipboardHistory();
+
+        mClipboardBufferFullText.clear();
+        mClipboardBufferFullText.addAll(history);
+
+        ArrayList<String> displayItems = new ArrayList<>();
+        for (String item : history) {
+            String oneLine = item.replace('\n', ' ').trim();
+            if (oneLine.length() > CLIPBOARD_BUFFER_DISPLAY_LIMIT) {
+                oneLine = oneLine.substring(0, CLIPBOARD_BUFFER_DISPLAY_LIMIT) + "…";
+            }
+            displayItems.add(oneLine);
+        }
+
+        mShowingClipboardBuffer = true;
+        populateSuggestionsViews(displayItems);
+
+        if (mMainKeyboardView != null) {
+            mMainKeyboardView.setClipboardBufferActive(true);
+        }
+    }
+
+    public void hideClipboardBuffer() {
+        mShowingClipboardBuffer = false;
+        mClipboardBufferFullText.clear();
+        populateSuggestionsViews(new ArrayList<>());
+
+        if (mMainKeyboardView != null) {
+            mMainKeyboardView.setClipboardBufferActive(false);
+        }
+    }
+
+    public boolean isShowingClipboardBuffer() {
+        return mShowingClipboardBuffer;
+    }
+
+    public CharSequence getClipboardBufferText(int idx) {
+        if (idx >= 0 && idx < mClipboardBufferFullText.size()) {
+            return mClipboardBufferFullText.get(idx);
+        }
+
+        return null;
     }
 
     public interface DismissListener {
