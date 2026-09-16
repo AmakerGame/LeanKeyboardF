@@ -61,6 +61,14 @@
     <string name="change_theme">Temayı değiştir</string>
     <string name="enable_suggestions">Önerileri etkinleştir</string>
     <string name="enable_suggestions_desc">Öneriler satırını etkinleştir</string>
+    <string name="learn_keyboard">Öğrenen Klavye</string>
+    <string name="learn_keyboard_desc">Klavye yazdığınız kelimeleri ve cümleleri hatırlar ve önerir</string>
+    <string name="clear_learned_words">Temizle</string>
+    <string name="clear_learned_words_message">Öneriler temizlendi</string>
+    <string name="interface_settings">Arayüz</string>
+    <string name="interface_settings_desc">Kayan klavye ve tema ayarları</string>
+    <string name="suggestions_settings">Öneriler</string>
+    <string name="suggestions_settings_desc">Öğrenen klavye ve öneri ayarları</string>
     <string name="show_launcher_icon">Simgeyi göster</string>
     <string name="show_launcher_icon_desc">Başlatıcı simgesini göster</string>
     <string name="enable_cyclic_navigation">Çevrimsel gezinme</string>
@@ -68,9 +76,10 @@
     <string name="clipboard_buffer">Pano arabelleği</string>
     <string name="clipboard_buffer_desc">Bu klavyeyle kopyalanan veya kesilen son öğeler</string>
     <string name="clear_clipboard_buffer">Temizle</string>
+    <string name="clear_clipboard_buffer_message">Pano temizlendi</string>
     <!--  END: autotranslated strings  -->
-    <string name="about_original">Original program</string>
-    <string name="about_this_program">This program</string>
+    <string name="about_original">GitHub LeanKeyboard</string>
+    <string name="about_this_program">GitHub LeanKeyboardF</string>
     <string name="settings">Settings</string>
     <string name="settings_desc">Additional settings</string>
     <string name="physical_keyboard_mode">Physical keyboard mode</string>

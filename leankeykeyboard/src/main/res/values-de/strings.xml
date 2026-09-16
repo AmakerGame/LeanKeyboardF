@@ -49,10 +49,18 @@
     <string name="change_theme">Thema ändern</string>
     <string name="enable_suggestions">Vorschläge aktivieren</string>
     <string name="enable_suggestions_desc">Vorschlagszeile aktivieren</string>
+    <string name="learn_keyboard">Tastatur lernt</string>
+    <string name="learn_keyboard_desc">Die Tastatur merkt sich getippte Wörter und Sätze und schlägt sie vor</string>
+    <string name="clear_learned_words">Löschen</string>
+    <string name="clear_learned_words_message">Vorschläge gelöscht</string>
+    <string name="interface_settings">Oberfläche</string>
+    <string name="interface_settings_desc">Einstellungen für schwebende Tastatur und Design</string>
+    <string name="suggestions_settings">Vorschläge</string>
+    <string name="suggestions_settings_desc">Einstellungen für lernende Tastatur und Vorschläge</string>
     <string name="show_launcher_icon">Icon anzeigen</string>
     <string name="show_launcher_icon_desc">Icon im Launcher anzeigen</string>
-    <string name="about_original">Originalprogramm</string>
-    <string name="about_this_program">Dieses Programm</string>
+    <string name="about_original">GitHub LeanKeyboard</string>
+    <string name="about_this_program">GitHub LeanKeyboardF</string>
     <string name="settings">Einstellungen</string>
     <string name="settings_desc">Zusätzliche Einstellungen</string>
     <string name="physical_keyboard_mode">Physischer Tastaturmodus</string>
@@ -71,4 +79,5 @@
     <string name="clipboard_buffer">Zwischenspeicher</string>
     <string name="clipboard_buffer_desc">Zuletzt mit dieser Tastatur kopierte oder ausgeschnittene Elemente</string>
     <string name="clear_clipboard_buffer">Löschen</string>
+    <string name="clear_clipboard_buffer_message">Zwischenablage geleert</string>
 </resources>

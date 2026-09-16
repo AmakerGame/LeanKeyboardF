@@ -23,9 +23,11 @@ public class KbSettingsFragment extends BaseSettingsFragment {
 
         addNextAction(R.string.change_layout, () -> startGuidedFragment(new KbLayoutFragment()));
 
-        addNextAction(R.string.change_theme, () -> startGuidedFragment(new KbThemeFragment()));
+        addNextAction(R.string.interface_settings, () -> startGuidedFragment(new KbInterfaceFragment()));
 
-        addNextAction(R.string.keyboard_settings, () -> startGuidedFragment(new KbKeyboardFragment()));
+        addNextAction(R.string.suggestions_settings, () -> startGuidedFragment(new KbSuggestionsFragment()));
+
+        addNextAction(R.string.clipboard_buffer, () -> startGuidedFragment(new KbClipboardFragment()));
 
         addNextAction(R.string.misc, () -> startGuidedFragment(new MiscFragment()));
 

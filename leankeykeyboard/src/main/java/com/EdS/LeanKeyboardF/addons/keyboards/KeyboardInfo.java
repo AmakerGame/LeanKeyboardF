@@ -9,4 +9,6 @@ public interface KeyboardInfo {
     void setEnabled(boolean enabled);
     boolean isAzerty();
     void setIsAzerty(boolean enabled);
+    boolean isAbc();
+    void setIsAbc(boolean enabled);
 }

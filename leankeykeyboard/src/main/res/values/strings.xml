@@ -64,6 +64,14 @@
     <string name="change_theme">Change Theme</string>
     <string name="enable_suggestions">Enable suggestions</string>
     <string name="enable_suggestions_desc">Enable suggestions row</string>
+    <string name="learn_keyboard">Learn Keyboard</string>
+    <string name="learn_keyboard_desc">The keyboard learns words and phrases you type and suggests them</string>
+    <string name="clear_learned_words">Clear</string>
+    <string name="clear_learned_words_message">Suggestions cleared</string>
+    <string name="interface_settings">Interface</string>
+    <string name="interface_settings_desc">Floating keyboard and theme settings</string>
+    <string name="suggestions_settings">Suggestions</string>
+    <string name="suggestions_settings_desc">Learn Keyboard and suggestion settings</string>
     <string name="show_launcher_icon">Show icon</string>
     <string name="show_launcher_icon_desc">Show launcher icon</string>
     <string name="enable_cyclic_navigation">Сyclic navigation</string>
@@ -71,8 +79,9 @@
     <string name="clipboard_buffer">Clipboard buffer</string>
     <string name="clipboard_buffer_desc">Recent items copied or cut with this keyboard</string>
     <string name="clear_clipboard_buffer">Clear</string>
-    <string name="about_original">Original program</string>
-    <string name="about_this_program">This program</string>
+    <string name="clear_clipboard_buffer_message">Clipboard cleared</string>
+    <string name="about_original">GitHub LeanKeyboard</string>
+    <string name="about_this_program">GitHub LeanKeyboardF</string>
     <string name="settings">Settings</string>
     <string name="settings_desc">Additional settings</string>
     <string name="physical_keyboard_mode">Physical keyboard mode</string>

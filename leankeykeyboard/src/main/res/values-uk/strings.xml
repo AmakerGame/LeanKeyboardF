@@ -24,7 +24,7 @@
     <string name="keyboardview_keycode_right">Праворуч</string>
     <string name="keyboard_headset_required_to_hear_password">Підключіть гарнітуру, щоб почути символи пароля.</string>
     <string name="keyboard_password_character_no_headset">Крапка.</string>
-    <string name="language_dialog_title">Оберіть додадкові розкладки</string>
+    <string name="language_dialog_title">Оберіть додаткові розкладки</string>
     <string name="language_dialog_subtitle">Щоб відкрити цей діалог тримайте кнопку \'земна куля\'</string>
     <string name="kb_layout_desc">Розкладка клавіатури</string>
     <string name="kb_layout">Розкладка</string>
@@ -54,6 +54,14 @@
     <string name="change_theme">Вибрати тему</string>
     <string name="enable_suggestions">Відображати підказки</string>
     <string name="enable_suggestions_desc">Відображати ряд з підказками при вводі</string>
+    <string name="learn_keyboard">Навчання клавіатури</string>
+    <string name="learn_keyboard_desc">Клавіатура запам\'ятовує слова та фрази, які ви вводите, і пропонує їх</string>
+    <string name="clear_learned_words">Очистити</string>
+    <string name="clear_learned_words_message">Очищено підказки</string>
+    <string name="interface_settings">Інтерфейс</string>
+    <string name="interface_settings_desc">Налаштування плаваючої клавіатури та теми</string>
+    <string name="suggestions_settings">Підказки</string>
+    <string name="suggestions_settings_desc">Налаштування навчання клавіатури та підказок</string>
     <string name="show_launcher_icon">Відображати іконку</string>
     <string name="show_launcher_icon_desc">Відображати іконку лаунчера</string>
     <string name="enable_cyclic_navigation">Циклічна навігація</string>
@@ -61,8 +69,9 @@
     <string name="clipboard_buffer">Буфер обміну</string>
     <string name="clipboard_buffer_desc">Останні елементи, скопійовані або вирізані цією клавіатурою</string>
     <string name="clear_clipboard_buffer">Очистити</string>
-    <string name="about_original">Оригінальна програма</string>
-    <string name="about_this_program">Ця програма</string>
+    <string name="clear_clipboard_buffer_message">Очищено буфер</string>
+    <string name="about_original">GitHub LeanKeyboard</string>
+    <string name="about_this_program">GitHub LeanKeyboardF</string>
     <string name="settings">Налаштування</string>
     <string name="settings_desc">Додаткові налаштування</string>
     <string name="physical_keyboard_mode">Режим фізичної клавіатури</string>

@@ -1,11 +1,5 @@
 apply plugin: 'com.android.application'
 
-// --- Release signing key -------------------------------------------------
-// Loaded from <rootProject>/keystore/keystore.properties, which is
-// created automatically (together with the .jks keystore itself) by
-// build.bat / build.sh on their very first run. Once created, both files
-// stay put and every following build just reuses them, so the app is
-// always signed with the same key. Never commit the keystore/ folder.
 def keystorePropertiesFile = rootProject.file("keystore/keystore.properties")
 def keystoreProperties = new Properties()
 def keystoreAvailable = keystorePropertiesFile.exists()
@@ -14,34 +8,27 @@ if (keystoreAvailable) {
 }
 
 android {
-    // Latest gradle fix: https://stackoverflow.com/questions/76300671/android-getting-error-namespace-not-specified
     namespace 'com.EdS.LeanKeyboardF'
 
-    // Latest gradle fix: https://stackoverflow.com/questions/22604627/gradle-buildconfigfield-buildconfig-cannot-resolve-symbol
     buildFeatures {
         buildConfig = true
     }
 
-    // FIX: Default interface methods are only supported starting with Android N (--min-api 24)
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    
-    compileSdkVersion project.properties.compileSdkVersion
-    buildToolsVersion project.properties.buildToolsVersion
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.EdS.LeanKeyboardF"
-        minSdkVersion project.properties.minSdkVersion
-        targetSdkVersion project.properties.targetSdkVersion
-        // Pass version at build time: gradlew assembleRelease -PappVersionName=6.2.0 -PappVersionCode=210
-        // build.bat / build.sh set these for you from the version you give on the command line.
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode project.hasProperty('appVersionCode') ? (project.property('appVersionCode') as Integer) : 205
         versionName project.hasProperty('appVersionName') ? project.property('appVersionName') as String : "6.1.35"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -58,76 +45,140 @@ android {
 
     buildTypes {
         release {
-            // https://medium.com/@angelhiadefiesta/how-to-obfuscate-in-android-with-proguard-acab47701577
-            minifyEnabled true // enable obfuscation
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            // Falls back to the debug/no signing config if the keystore hasn't been
-            // generated yet, so the very first `assembleRelease` (before build.bat/
-            // build.sh has run) doesn't hard-fail the whole build.
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             if (keystoreAvailable) {
                 signingConfig signingConfigs.release
             }
         }
     }
 
-    // Produces one "universal" APK (all ABIs, works everywhere) plus one
-    // slimmer APK per CPU architecture, for every flavor/buildType.
-    splits {
-        abi {
-            enable true
-            reset()
-            include "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
-            universalApk true
+    lint {
+        abortOnError true
+        disable 'MissingTranslation', 'NewApi'
+    }
+
+    // Оголошення двох вимірів
+    flavorDimensions "distribution", "locale"
+
+    productFlavors {
+        playstore {
+            dimension = "distribution"   // присвоєння
+            applicationId "com.EdS.LeanKeyboardF"
+        }
+        origin {
+            dimension = "distribution"
+            applicationId "com.EdS.LeanKeyboardF"
+        }
+
+        create("all") {
+            dimension = "locale"
+        }
+
+        en {
+            dimension = "locale"
+            resConfigs "en"
         }
     }
 
-    // naming example: LeanKeyboardF_v6.8.12_origin_r_universal.apk
-    // https://stackoverflow.com/questions/18332474/how-to-set-versionname-in-apk-filename-using-gradle
+    // Автовиявлення мов та створення flavor'ів en+<мова>
+    def valuesDirs = file("src/main/res").listFiles({ File f ->
+        f.isDirectory() && f.name.startsWith("values-")
+    } as FileFilter) ?: ([] as File[])
+
+    def densityQualifiers = ["hdpi", "mdpi", "xhdpi", "xxhdpi", "xxxhdpi", "tvdpi", "ldpi", "nodpi", "anydpi"]
+    def excludedLocales = ["ar-rXB"]
+
+    def detectedLocales = valuesDirs
+            .collect { it.name.replace("values-", "") }
+            .findAll { code -> !densityQualifiers.any { q -> code.endsWith(q) } }
+            .findAll { code -> !excludedLocales.contains(code) }
+            .unique()
+            .sort()
+
+    def localeLabels = [
+            "uk": "UA", "ru": "RU", "de": "DE", "fr": "FR", "it": "IT",
+            "es": "ES", "nl": "NL", "ro": "RO", "bg": "BG", "el": "EL",
+            "tr": "TR", "sv": "SV", "sl": "SL", "th": "TH", "fa": "FA",
+            "ar": "AR", "is-rIS": "IS"
+    ]
+
+    detectedLocales.each { code ->
+        def flavorName = "en" + code.replaceAll("[^a-zA-Z0-9]", "").capitalize()
+        productFlavors.create(flavorName) {
+            dimension = "locale"   // присвоєння
+            resConfigs "en", code
+        }
+    }
+
+    // Фільтр варіантів: Play Store лише з "all", Origin без "all"
+    variantFilter { variant ->
+        def flavorNames = variant.flavors*.name
+        boolean isPlaystore = flavorNames.contains("playstore")
+        boolean isAllLocales = flavorNames.contains("all")
+
+        if (isPlaystore && !isAllLocales) {
+            variant.setIgnore(true)
+        }
+
+        if (flavorNames.contains("origin") && isAllLocales) {
+            variant.setIgnore(true)
+        }
+    }
+
+    // Налаштування імен APK (опціонально, можна залишити як є)
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
             def project = "LeanKeyboardF"
-            // Latest gradle fix: https://stackoverflow.com/questions/62075122/no-such-property-variantconfiguration-for-class
             def buildType = variant.buildType.name.take(1)
             def version = variant.versionName
-            def flavor = variant.productFlavors[-1].name
-            def abi = output.getFilter(com.android.build.OutputFile.ABI)
-            def abiSuffix = abi != null ? "_${abi}" : "_universal"
+            def flavorNames = variant.productFlavors*.name
+            def localeFlavor = flavorNames.find { it != "playstore" && it != "origin" }
 
-            def newApkName = sprintf("%s_v%s_%s_%s%s.apk", [project, version, flavor, buildType, abiSuffix])
+            def localeTag
+            if (localeFlavor == "all" || localeFlavor == null) {
+                localeTag = ""
+            } else if (localeFlavor == "en") {
+                localeTag = "_EN"
+            } else {
+                def originalCode = detectedLocales.find { c ->
+                    ("en" + c.replaceAll("[^a-zA-Z0-9]", "").capitalize()) == localeFlavor
+                }
+                def label = localeLabels[originalCode] ?: (originalCode ?: localeFlavor).toUpperCase()
+                localeTag = "_EN+${label}"
+            }
 
+            def newApkName = sprintf("%s%s_v%s_%s.apk", [project, localeTag, version, buildType])
             output.outputFileName = new File(newApkName)
         }
     }
 
-    lintOptions {
-        abortOnError true
-        disable 'MissingTranslation'
-        disable 'NewApi'
-    }
-
-    // gradle 4.6 migration: disable dimensions mechanism
-    // more: https://proandroiddev.com/advanced-android-flavors-part-4-a-new-version-fc2ad80c01bb
-    flavorDimensions "default"
-
-    productFlavors {
-        playstore {
-            applicationId "com.EdS.LeanKeyboardF"
-        }
-        origin {
-            applicationId "com.EdS.LeanKeyboardF"
+    // CI helper: with 2 flavor dimensions, AGP does not generate flavor-only
+    // aggregate tasks (e.g. "assembleOriginRelease" doesn't exist - only
+    // exact per-combo tasks like "assembleOriginEnRelease" do), and their
+    // exact set grows every time a translation is added. Rather than have
+    // build.sh guess/parse "gradlew tasks" output, print the real variant
+    // names here (config-time, runs on every Gradle invocation) so the
+    // script can build the exact task list itself. Silent unless build.sh
+    // asks for it via -PciListVariants=true.
+    if (project.hasProperty('ciListVariants')) {
+        applicationVariants.all { variant ->
+            if (variant.buildType.name == "release") {
+                println "CI_VARIANT::${variant.name}::${variant.productFlavors*.name.join(',')}"
+            }
         }
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation(project.properties.espressoCoreVersion, {
+    androidTestImplementation(rootProject.ext.espressoCoreVersion, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testImplementation project.properties.junitVersion
-    implementation project.properties.appCompatXVersion
-    implementation project.properties.leanbackCompatXVersion
-    implementation project.properties.constraintXVersion
-    implementation project.properties.designXVersion
-    implementation project.properties.voiceOverlayVersion
+    testImplementation rootProject.ext.junitVersion
+    implementation rootProject.ext.appCompatXVersion
+    implementation rootProject.ext.leanbackCompatXVersion
+    implementation rootProject.ext.constraintXVersion
+    implementation rootProject.ext.designXVersion
+    implementation rootProject.ext.voiceOverlayVersion
 }

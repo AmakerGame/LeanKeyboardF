@@ -46,6 +46,28 @@ public class LeanbackUtils {
         return info.inputType & InputType.TYPE_MASK_VARIATION;
     }
 
+    // Never let Learn Keyboard learn or suggest from password fields.
+    public static boolean isPasswordField(EditorInfo info) {
+        if (info == null) {
+            return false;
+        }
+
+        int cls = info.inputType & InputType.TYPE_MASK_CLASS;
+        int variation = getInputTypeVariation(info);
+
+        if (cls == InputType.TYPE_CLASS_TEXT) {
+            return variation == InputType.TYPE_TEXT_VARIATION_PASSWORD
+                    || variation == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                    || variation == InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD;
+        }
+
+        if (cls == InputType.TYPE_CLASS_NUMBER) {
+            return variation == InputType.TYPE_NUMBER_VARIATION_PASSWORD;
+        }
+
+        return false;
+    }
+
     public static boolean isAlphabet(int letter) {
         return Character.isLetter(letter);
     }
@@ -102,6 +124,130 @@ public class LeanbackUtils {
         }
 
         return result.toString();
+    }
+
+    // Characters that end a "word" for the learning dictionary
+    // (Learn Keyboard). Kept as its own small window (200 chars) around
+    // the cursor rather than the whole field, both for speed and to
+    // avoid the same kind of length-cap bug that affected arrow-key
+    // navigation on long text (yuliskov/LeanKeyboard#51) - a "current
+    // word" is never realistically anywhere near that long.
+    private static final String WORD_BOUNDARY_CHARS = " \t\n.,!?;:()\"'\u2014\u2013";
+    private static final int WORD_LOOKUP_WINDOW = 200;
+
+    public static boolean isWordBoundary(char c) {
+        return WORD_BOUNDARY_CHARS.indexOf(c) >= 0;
+    }
+
+    // [0]: the word right at the cursor - the word being typed if the
+    //      cursor is mid-word, or the word just finished if the cursor is
+    //      right after a boundary character (space, punctuation...).
+    // [1]: the word before that one.
+    // Either can be "" if not available (start of field, etc).
+    public static String[] getLastTwoWords(InputConnection connection) {
+        CharSequence before = connection.getTextBeforeCursor(WORD_LOOKUP_WINDOW, 0);
+        if (before == null) {
+            return new String[]{"", ""};
+        }
+
+        int end = before.length();
+        while (end > 0 && isWordBoundary(before.charAt(end - 1))) {
+            end--;
+        }
+        int start = end;
+        while (start > 0 && !isWordBoundary(before.charAt(start - 1))) {
+            start--;
+        }
+        String word1 = before.subSequence(start, end).toString();
+
+        int end2 = start;
+        while (end2 > 0 && isWordBoundary(before.charAt(end2 - 1))) {
+            end2--;
+        }
+        int start2 = end2;
+        while (start2 > 0 && !isWordBoundary(before.charAt(start2 - 1))) {
+            start2--;
+        }
+        String word2 = before.subSequence(start2, end2).toString();
+
+        return new String[]{word1, word2};
+    }
+
+    // How many characters of the *current word* sit before/after the
+    // cursor (e.g. [3, 2] if the cursor is in the middle of a 5-letter
+    // word). Used when replacing a word with a picked suggestion, so
+    // only that word is deleted - not the whole field.
+    public static int[] getCurrentWordBoundaryLengths(InputConnection connection) {
+        int beforeLen = 0;
+        CharSequence before = connection.getTextBeforeCursor(WORD_LOOKUP_WINDOW, 0);
+        if (before != null) {
+            int i = before.length();
+            while (i > 0 && !isWordBoundary(before.charAt(i - 1))) {
+                i--;
+            }
+            beforeLen = before.length() - i;
+        }
+
+        int afterLen = 0;
+        CharSequence after = connection.getTextAfterCursor(WORD_LOOKUP_WINDOW, 0);
+        if (after != null) {
+            int i = 0;
+            while (i < after.length() && !isWordBoundary(after.charAt(i))) {
+                i++;
+            }
+            afterLen = i;
+        }
+
+        return new int[]{beforeLen, afterLen};
+    }
+
+    // True if the cursor is at the very start of the field, or right
+    // after a sentence-ending character (., !, ?) plus optional
+    // whitespace - used to decide whether the next suggested word should
+    // be capitalized.
+    public static boolean isSentenceStart(InputConnection connection) {
+        CharSequence before = connection.getTextBeforeCursor(10, 0);
+        if (before == null || before.length() == 0) {
+            return true;
+        }
+
+        for (int i = before.length() - 1; i >= 0; i--) {
+            char c = before.charAt(i);
+            if (c == ' ' || c == '\t') {
+                continue;
+            }
+            return c == '.' || c == '!' || c == '?' || c == '\n';
+        }
+
+        return true;
+    }
+
+    // True if the character immediately before the cursor is itself a
+    // word-boundary character (or there's nothing before the cursor) -
+    // i.e. the user isn't mid-word right now.
+    public static boolean isAtWordBoundary(InputConnection connection) {
+        CharSequence lastChar = connection.getTextBeforeCursor(1, 0);
+        return lastChar == null || lastChar.length() == 0 || isWordBoundary(lastChar.charAt(0));
+    }
+
+    // The word starting right at the cursor, looking forward. Used as a
+    // fallback when there's nothing usable *before* the cursor (e.g. the
+    // cursor just moved to the very start of the field, or landed right
+    // in front of a word via an arrow key) - without this, a suggestion
+    // could vanish just from moving the cursor there, even though the
+    // word it was based on is still right next to it.
+    public static String getWordAfterCursor(InputConnection connection) {
+        CharSequence after = connection.getTextAfterCursor(WORD_LOOKUP_WINDOW, 0);
+        if (after == null) {
+            return "";
+        }
+
+        int i = 0;
+        while (i < after.length() && !isWordBoundary(after.charAt(i))) {
+            i++;
+        }
+
+        return after.subSequence(0, i).toString();
     }
 
     public static void sendEnterKey(InputConnection connection) {

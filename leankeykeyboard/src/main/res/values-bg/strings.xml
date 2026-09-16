@@ -61,6 +61,14 @@
     <string name="change_theme">Промяна на темата</string>
     <string name="enable_suggestions">Активиране на предложенията</string>
     <string name="enable_suggestions_desc">Активиране на реда с предложения</string>
+    <string name="learn_keyboard">Обучаваща клавиатура</string>
+    <string name="learn_keyboard_desc">Клавиатурата запомня въведените думи и фрази и ги предлага</string>
+    <string name="clear_learned_words">Изчисти</string>
+    <string name="clear_learned_words_message">Предложенията са изчистени</string>
+    <string name="interface_settings">Интерфейс</string>
+    <string name="interface_settings_desc">Настройки на плаващата клавиатура и темата</string>
+    <string name="suggestions_settings">Предложения</string>
+    <string name="suggestions_settings_desc">Настройки на обучаващата клавиатура и предложенията</string>
     <string name="show_launcher_icon">Показване на икона</string>
     <string name="show_launcher_icon_desc">Показване на иконата на стартовия панел</string>
     <string name="enable_cyclic_navigation">Циклична навигация</string>
@@ -68,9 +76,10 @@
     <string name="clipboard_buffer">Буфер за обмен</string>
     <string name="clipboard_buffer_desc">Последни елементи, копирани или изрязани с тази клавиатура</string>
     <string name="clear_clipboard_buffer">Изчисти</string>
+    <string name="clear_clipboard_buffer_message">Буферът е изчистен</string>
     <!--  END: autotranslated strings  -->
-    <string name="about_original">Original program</string>
-    <string name="about_this_program">This program</string>
+    <string name="about_original">GitHub LeanKeyboard</string>
+    <string name="about_this_program">GitHub LeanKeyboardF</string>
     <string name="settings">Settings</string>
     <string name="settings_desc">Additional settings</string>
     <string name="physical_keyboard_mode">Physical keyboard mode</string>

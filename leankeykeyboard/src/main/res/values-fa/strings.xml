@@ -63,6 +63,14 @@
     <string name="change_theme">تغییر زمینه</string>
     <string name="enable_suggestions">پیشنهادات را فعال کنید</string>
     <string name="enable_suggestions_desc">ردیف پیشنهادات را فعال کنید</string>
+    <string name="learn_keyboard">صفحه‌کلید یادگیرنده</string>
+    <string name="learn_keyboard_desc">صفحه‌کلید کلمات و عباراتی را که تایپ می‌کنید به خاطر می‌سپارد و پیشنهاد می‌دهد</string>
+    <string name="clear_learned_words">پاک کردن</string>
+    <string name="clear_learned_words_message">پیشنهادها پاک شدند</string>
+    <string name="interface_settings">رابط کاربری</string>
+    <string name="interface_settings_desc">تنظیمات صفحه‌کلید شناور و پوسته</string>
+    <string name="suggestions_settings">پیشنهادها</string>
+    <string name="suggestions_settings_desc">تنظیمات صفحه‌کلید یادگیرنده و پیشنهادها</string>
     <string name="show_launcher_icon">نماد نمایش</string>
     <string name="show_launcher_icon_desc">نماد پرتاب را نشان دهید</string>
     <string name="enable_cyclic_navigation">ناوبری حلقوی</string>
@@ -70,9 +78,10 @@
     <string name="clipboard_buffer">بافر تبادل</string>
     <string name="clipboard_buffer_desc">موارد اخیر کپی یا برش‌خورده با این صفحه‌کلید</string>
     <string name="clear_clipboard_buffer">پاک کردن</string>
+    <string name="clear_clipboard_buffer_message">کلیپ‌بورد پاک شد</string>
     <!--  END: autotranslated strings  -->
-    <string name="about_original">Original program</string>
-    <string name="about_this_program">This program</string>
+    <string name="about_original">GitHub LeanKeyboard</string>
+    <string name="about_this_program">GitHub LeanKeyboardF</string>
     <string name="settings">Settings</string>
     <string name="settings_desc">Additional settings</string>
     <string name="physical_keyboard_mode">Physical keyboard mode</string>

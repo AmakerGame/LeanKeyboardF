@@ -31,7 +31,8 @@ on:
         default: "playstore,origin"
 
 permissions:
-  contents: write # needed to commit the keystore/versionCode back to the repo
+  contents: write  # needed to read keystore/keystore.properties AND to push the
+                   # keystore/versionCode commit back to the repo at the end of the job
 
 jobs:
   build:
@@ -63,11 +64,13 @@ jobs:
       - name: Build (${{ github.event.inputs.version }})
         run: ./build.sh "${{ github.event.inputs.version }}" "${{ github.event.inputs.flavors }}"
 
-      - name: Upload APKs
+      - name: Upload APKs / AAB
         uses: actions/upload-artifact@v4
         with:
           name: LeanKeyboardF-v${{ github.event.inputs.version }}
-          path: releases/${{ github.event.inputs.version }}/*.apk
+          path: |
+            releases/${{ github.event.inputs.version }}/*.apk
+            releases/${{ github.event.inputs.version }}/*.aab
           if-no-files-found: error
 
       # Persists a newly-generated keystore (first run) and the
@@ -83,4 +86,3 @@ jobs:
             git commit -m "chore: update release keystore/versionCode [skip ci]"
             git push
           fi
-

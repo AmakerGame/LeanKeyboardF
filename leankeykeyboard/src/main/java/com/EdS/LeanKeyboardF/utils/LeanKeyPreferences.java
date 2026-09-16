@@ -24,6 +24,7 @@ public final class LeanKeyPreferences {
     private static final String PHYSICAL_KEYBOARD_MODE = "physicalKeyboardMode";
     private static final String FLOATING_KEYBOARD = "floatingKeyboard";
     private static final String KEYBOARD_SIZE_LEVEL = "keyboardSizeLevel";
+    private static final String LEARN_KEYBOARD_ENABLED = "learnKeyboardEnabled";
     private static final String CLIPBOARD_HISTORY = "clipboardHistory";
     private static LeanKeyPreferences sInstance;
     private final Context mContext;
@@ -188,6 +189,18 @@ public final class LeanKeyPreferences {
 
     public void clearClipboardHistory() {
         mPrefs.edit().remove(CLIPBOARD_HISTORY).apply();
+    }
+
+    // Learn Keyboard: on = the keyboard learns words/word-pairs from
+    // typing and suggests them; off = no learning, no learned
+    // suggestions (existing learned data is kept, just not used, so
+    // turning it back on later picks up where it left off).
+    public boolean isLearnKeyboardEnabled() {
+        return mPrefs.getBoolean(LEARN_KEYBOARD_ENABLED, true);
+    }
+
+    public void setLearnKeyboardEnabled(boolean enabled) {
+        mPrefs.edit().putBoolean(LEARN_KEYBOARD_ENABLED, enabled).apply();
     }
 
     public java.util.List<String> getClipboardHistory() {

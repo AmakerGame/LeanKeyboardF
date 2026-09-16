@@ -61,6 +61,14 @@
     <string name="change_theme">Αλλαξε θέμα</string>
     <string name="enable_suggestions">Ενεργοποίηση προτάσεων</string>
     <string name="enable_suggestions_desc">Ενεργοποίηση σειράς προτάσεων</string>
+    <string name="learn_keyboard">Πληκτρολόγιο εκμάθησης</string>
+    <string name="learn_keyboard_desc">Το πληκτρολόγιο απομνημονεύει λέξεις και φράσεις που πληκτρολογείτε και τις προτείνει</string>
+    <string name="clear_learned_words">Εκκαθάριση</string>
+    <string name="clear_learned_words_message">Οι προτάσεις διαγράφηκαν</string>
+    <string name="interface_settings">Διεπαφή</string>
+    <string name="interface_settings_desc">Ρυθμίσεις αιωρούμενου πληκτρολογίου και θέματος</string>
+    <string name="suggestions_settings">Προτάσεις</string>
+    <string name="suggestions_settings_desc">Ρυθμίσεις πληκτρολογίου εκμάθησης και προτάσεων</string>
     <string name="show_launcher_icon">Εμφάνιση εικονιδίου</string>
     <string name="show_launcher_icon_desc">Εμφάνιση εικονιδίου εκκίνησης</string>
     <string name="enable_cyclic_navigation">Κυκλική πλοήγηση</string>
@@ -68,9 +76,10 @@
     <string name="clipboard_buffer">Ιστορικό προχείρου</string>
     <string name="clipboard_buffer_desc">Πρόσφατα στοιχεία που αντιγράφηκαν ή αποκόπηκαν με αυτό το πληκτρολόγιο</string>
     <string name="clear_clipboard_buffer">Εκκαθάριση</string>
+    <string name="clear_clipboard_buffer_message">Το πρόχειρο διαγράφηκε</string>
     <!--  END: autotranslated strings  -->
-    <string name="about_original">Original program</string>
-    <string name="about_this_program">This program</string>
+    <string name="about_original">GitHub LeanKeyboard</string>
+    <string name="about_this_program">GitHub LeanKeyboardF</string>
     <string name="settings">Settings</string>
     <string name="settings_desc">Additional settings</string>
     <string name="physical_keyboard_mode">Physical keyboard mode</string>

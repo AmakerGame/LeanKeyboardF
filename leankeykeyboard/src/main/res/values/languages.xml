@@ -3,41 +3,65 @@
     <string-array name="additional_languages">
         <item>English|en_us</item>
         <item>English (AZERTY)|en_us|azerty</item>
+        <item>English (ABC)|en_us|abc</item>
         <item>Русский|ru</item>
+        <item>Русский (ABC)|ru|abc</item>
         <item>Українська|uk</item>
+        <item>Українська (ABC)|uk|abc</item>
         <item>Deutsch|de</item>
+        <item>Deutsch (ABC)|de|abc</item>
         <item>Български (Фонетичен)|bg</item>
         <item>Български (БДС)|bg|azerty</item>
+        <item>Български (ABC)|bg|abc</item>
         <item>Nederlands|nl</item>
+        <item>Nederlands (ABC)|nl|abc</item>
         <item>Français|fr</item>
         <item>Français (AZERTY)|fr|azerty</item>
+        <item>Français (ABC)|fr|abc</item>
         <item>Danish|da</item>
+        <item>Danish (ABC)|da|abc</item>
         <!-- Greek -->
         <item>Ελληνικά|el</item>
+        <item>Ελληνικά (ABC)|el|abc</item>
         <!-- Icelandic -->
         <item>Íslenska|is</item>
+        <item>Íslenska (ABC)|is|abc</item>
         <item>Italiano|it</item>
+        <item>Italiano (ABC)|it|abc</item>
         <!-- Swedish -->
         <item>Svenska|sv</item>
+        <item>Svenska (ABC)|sv|abc</item>
         <item>Español|es_us</item>
+        <item>Español (ABC)|es_us|abc</item>
         <!-- Romanian -->
         <item>Română|ro</item>
+        <item>Română (ABC)|ro|abc</item>
         <item>Slovenščina|sl</item>
+        <item>Slovenščina (ABC)|sl|abc</item>
         <!-- Arabic -->
         <item>Arabic|ar</item>
+        <item>Arabic (ABC)|ar|abc</item>
         <!-- Hebrew -->
         <item>Hebrew|he</item>
+        <item>Hebrew (ABC)|he|abc</item>
         <item>Persian|fa</item>
+        <item>Persian (ABC)|fa|abc</item>
         <!-- Thai -->
         <item>ภาษาไทย|th</item>
+        <item>ภาษาไทย (ABC)|th|abc</item>
         <!-- Turkish -->
         <item>Türkçe (Q board)|tr</item>
         <item>Türkçe|tr|azerty</item>
+        <item>Türkçe (ABC)|tr|abc</item>
         <!-- Korean -->
         <item>한국어|ko_kr</item>
+        <item>한국어 (ABC)|ko_kr|abc</item>
         <item>ქართული|ka</item>
+        <item>ქართული (ABC)|ka|abc</item>
         <!-- Portuguese -->
         <item>Português|pt</item>
+        <item>Português (ABC)|pt|abc</item>
         <item>Português (Brasil)|pt_br</item>
+        <item>Português (Brasil) (ABC)|pt_br|abc</item>
     </string-array>
 </resources>

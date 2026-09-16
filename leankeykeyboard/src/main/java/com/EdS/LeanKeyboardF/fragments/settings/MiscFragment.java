@@ -22,12 +22,8 @@ public class MiscFragment extends BaseSettingsFragment {
         mContext = context;
         mPrefs = LeanKeyPreferences.instance(getActivity());
         addCheckedAction(R.string.keep_on_screen, R.string.keep_on_screen_desc, mPrefs::getForceShowKeyboard, mPrefs::setForceShowKeyboard);
-        addCheckedAction(R.string.enable_suggestions, R.string.enable_suggestions_desc, mPrefs::getSuggestionsEnabled, mPrefs::setSuggestionsEnabled);
         addCheckedAction(R.string.show_launcher_icon, R.string.show_launcher_icon_desc, this::getLauncherIconShown, this::setLauncherIconShown);
         addCheckedAction(R.string.enable_cyclic_navigation, R.string.enable_cyclic_navigation_desc, mPrefs::isCyclicNavigationEnabled, mPrefs::setCyclicNavigationEnabled);
-
-        addInfoAction(getString(R.string.clipboard_buffer), getString(R.string.clipboard_buffer_desc));
-        addNextAction(R.string.clear_clipboard_buffer, () -> mPrefs.clearClipboardHistory());
     }
 
     @NonNull

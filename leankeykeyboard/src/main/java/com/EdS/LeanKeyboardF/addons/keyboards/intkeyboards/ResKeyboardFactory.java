@@ -81,7 +81,7 @@ public class ResKeyboardFactory implements KeyboardFactory {
 
             @Override
             public Keyboard createAbcKeyboard() {
-                String prefix = info.isAzerty() ? "azerty_" : "qwerty_";
+                String prefix = info.isAzerty() ? "azerty_" : (info.isAbc() ? "abc_" : "qwerty_");
                 int kbResId = mContext.getResources().getIdentifier(prefix + langCode, "xml", mContext.getPackageName());
                 Keyboard keyboard = new Keyboard(mContext, kbResId);
                 Log.d(TAG, "Creating keyboard... " + info.getLangName());

@@ -1300,6 +1300,23 @@ public class LeanbackKeyboardContainer {
     }
 
     public void updateSuggestions(ArrayList<String> suggestions) {
+        clearClipboardBufferIfShowing();
+        addUserInputToSuggestions(suggestions);
+        populateSuggestionsViews(suggestions);
+    }
+
+    // Same as updateSuggestions(), but skips addUserInputToSuggestions -
+    // which unconditionally overwrites item 0 with the *whole* field's
+    // text. That's harmless for the old domain-suggestion behaviour, but
+    // it would clobber Learn Keyboard's actual best-ranked suggestion,
+    // bumping it out of the top slot (or off the row entirely). Learn
+    // Keyboard's suggestions go through this instead.
+    public void updateSuggestionsRaw(ArrayList<String> suggestions) {
+        clearClipboardBufferIfShowing();
+        populateSuggestionsViews(suggestions);
+    }
+
+    private void clearClipboardBufferIfShowing() {
         if (mShowingClipboardBuffer) {
             mShowingClipboardBuffer = false;
             mClipboardBufferFullText.clear();
@@ -1308,9 +1325,6 @@ public class LeanbackKeyboardContainer {
                 mMainKeyboardView.setClipboardBufferActive(false);
             }
         }
-
-        addUserInputToSuggestions(suggestions);
-        populateSuggestionsViews(suggestions);
     }
 
     // Populates the suggestions row views from the given list, without
@@ -1608,11 +1622,13 @@ public class LeanbackKeyboardContainer {
 
                 mMainKeyboardView.setAlpha(opacity);
                 mActionButtonView.setAlpha(opacity);
+                mClipboardContainer.setAlpha(opacity);
                 mVoiceButtonView.setAlpha(calcOpacity);
                 if (scale == mAlphaOut) {
                     if (!enterVoice) {
                         mMainKeyboardView.setVisibility(View.VISIBLE);
                         mActionButtonView.setVisibility(View.VISIBLE);
+                        mClipboardContainer.setVisibility(View.VISIBLE);
                         return;
                     }
 
@@ -1621,6 +1637,7 @@ public class LeanbackKeyboardContainer {
                     if (enterVoice) {
                         mMainKeyboardView.setVisibility(View.INVISIBLE);
                         mActionButtonView.setVisibility(View.INVISIBLE);
+                        mClipboardContainer.setVisibility(View.INVISIBLE);
                         return;
                     }
 

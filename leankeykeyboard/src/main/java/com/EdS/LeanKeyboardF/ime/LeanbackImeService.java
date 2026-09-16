@@ -22,6 +22,10 @@ import android.view.inputmethod.ExtractedTextRequest;
 import android.view.inputmethod.InputConnection;
 import com.EdS.LeanKeyboardF.ime.LeanbackKeyboardController.InputListener;
 import com.EdS.LeanKeyboardF.utils.LeanKeyPreferences;
+import com.EdS.LeanKeyboardF.utils.LearningDictionary;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LeanbackImeService extends KeyMapperImeService {
     private static final String TAG = LeanbackImeService.class.getSimpleName();
@@ -46,8 +50,19 @@ public class LeanbackImeService extends KeyMapperImeService {
     private final Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == MSG_SUGGESTIONS_CLEAR && mShouldClearSuggestions) {
-                mSuggestionsFactory.clearSuggestions();
-                mKeyboardController.updateSuggestions(mSuggestionsFactory.getSuggestions());
+                InputConnection connection = getCurrentInputConnection();
+                if (connection != null) {
+                    // Was: always wiped the row with the old (empty for
+                    // normal fields) suggestion system, regardless of
+                    // whether Learn Keyboard still had something
+                    // relevant to show - so any suggestion vanished
+                    // ~1s after typing no matter what. Recompute
+                    // properly instead of blindly clearing.
+                    refreshSuggestions(connection);
+                } else {
+                    mSuggestionsFactory.clearSuggestions();
+                    mKeyboardController.updateSuggestions(mSuggestionsFactory.getSuggestions());
+                }
                 mShouldClearSuggestions = false;
             }
 
@@ -93,6 +108,151 @@ public class LeanbackImeService extends KeyMapperImeService {
         }
     }
 
+    // Learn Keyboard suggestions must bypass the old echo-the-whole-field
+    // behaviour (see updateSuggestionsRaw), while domain-mode (email
+    // fields) keeps it, since that's existing, working behaviour.
+    private void refreshSuggestions(InputConnection connection) {
+        ArrayList<String> suggestions = computeSuggestions(connection);
+
+        if (mSuggestionsFactory.shouldSuggestionsAmend()) {
+            mKeyboardController.updateSuggestions(suggestions);
+        } else {
+            mKeyboardController.updateSuggestionsRaw(suggestions);
+        }
+    }
+
+    // Called right after a word-boundary character (space, punctuation)
+    // is committed - records the word that was just finished, and the
+    // word-pair (bigram) with whatever came before it, for Learn
+    // Keyboard's suggestions.
+    private void learnFromCursor(InputConnection connection) {
+        if (!LeanKeyPreferences.instance(this).isLearnKeyboardEnabled()) {
+            return;
+        }
+
+        if (LeanbackUtils.isPasswordField(getCurrentInputEditorInfo())) {
+            return;
+        }
+
+        String[] words = LeanbackUtils.getLastTwoWords(connection);
+        String justCompleted = words[0];
+        String before = words[1];
+
+        if (!justCompleted.isEmpty()) {
+            LearningDictionary dictionary = LearningDictionary.instance(this);
+            dictionary.learnWord(justCompleted);
+
+            if (!before.isEmpty()) {
+                dictionary.learnBigram(before, justCompleted);
+            }
+        }
+    }
+
+    // For text that may contain multiple words at once (voice
+    // recognition results) - learns each word individually plus the
+    // bigrams between them, instead of storing the whole phrase as one
+    // "word" (which learnWord() would otherwise do, since it doesn't
+    // split on whitespace itself).
+    private void learnPhrase(String phrase) {
+        if (phrase == null || phrase.trim().isEmpty()) {
+            return;
+        }
+
+        String[] tokens = phrase.trim().split("\\s+");
+        LearningDictionary dictionary = LearningDictionary.instance(this);
+        String previous = null;
+
+        for (String token : tokens) {
+            if (token.isEmpty()) {
+                continue;
+            }
+
+            dictionary.learnWord(token);
+
+            if (previous != null) {
+                dictionary.learnBigram(previous, token);
+            }
+
+            previous = token;
+        }
+    }
+
+    // Replaces the old suggestion source (which only ever did anything
+    // for email domain fields, or if the target app happened to supply
+    // its own completions) with Learn Keyboard's own ranked predictions,
+    // while it's enabled and the field isn't in that domain-amend mode.
+    private ArrayList<String> computeSuggestions(InputConnection connection) {
+        if (mSuggestionsFactory.shouldSuggestionsAmend() || !LeanKeyPreferences.instance(this).isLearnKeyboardEnabled()
+                || LeanbackUtils.isPasswordField(getCurrentInputEditorInfo())) {
+            return mSuggestionsFactory.getSuggestions();
+        }
+
+        boolean atBoundary = LeanbackUtils.isAtWordBoundary(connection);
+        String[] words = LeanbackUtils.getLastTwoWords(connection);
+        String relevantWord = words[0];
+
+        if (relevantWord.isEmpty()) {
+            // Nothing usable immediately before the cursor - e.g. it
+            // just moved to the very start of the field, or in front of
+            // a word entirely, via an arrow key. If there's a word right
+            // after the cursor, treat it the same as a word being
+            // typed/edited so the suggestion doesn't just vanish every
+            // time the cursor moves near it.
+            relevantWord = LeanbackUtils.getWordAfterCursor(connection);
+            atBoundary = false;
+        }
+
+        LearningDictionary dictionary = LearningDictionary.instance(this);
+        ArrayList<String> result = new ArrayList<>();
+
+        if (!relevantWord.isEmpty()) {
+            List<String> learned;
+            boolean capitalize;
+
+            if (atBoundary) {
+                learned = dictionary.getNextWordSuggestions(relevantWord, MAX_SUGGESTIONS);
+                // Words are stored lowercase (see LearningDictionary) -
+                // capitalize the suggestion if this word starts a new
+                // sentence, matching normal capitalization expectations.
+                capitalize = LeanbackUtils.isSentenceStart(connection);
+            } else {
+                learned = dictionary.getPrefixSuggestions(relevantWord, MAX_SUGGESTIONS);
+                // Match whatever casing the user has typed so far -
+                // typing "H" should suggest "Hello", not "hello".
+                capitalize = Character.isUpperCase(relevantWord.charAt(0));
+
+                if (learned.isEmpty()) {
+                    // The cursor can land exactly at the end of a
+                    // complete, already-known word without a boundary
+                    // character after it yet - most commonly by pressing
+                    // an arrow key right back onto the end of the word
+                    // that just triggered a "next word" suggestion. A
+                    // prefix search then only matches words that extend
+                    // this one (excluding the word itself), which is
+                    // usually nothing, so the suggestion would vanish.
+                    // Falling back to "what usually follows this word"
+                    // keeps it showing instead.
+                    learned = dictionary.getNextWordSuggestions(relevantWord, MAX_SUGGESTIONS);
+                    capitalize = LeanbackUtils.isSentenceStart(connection);
+                }
+            }
+
+            for (String word : learned) {
+                result.add(capitalize ? capitalizeFirst(word) : word);
+            }
+        }
+
+        return result;
+    }
+
+    private String capitalizeFirst(String word) {
+        if (word.isEmpty()) {
+            return word;
+        }
+
+        return Character.toUpperCase(word.charAt(0)) + word.substring(1);
+    }
+
     private void clearSuggestionsDelayed() {
         if (!mSuggestionsFactory.shouldSuggestionsAmend()) {
             mHandler.removeMessages(MSG_SUGGESTIONS_CLEAR);
@@ -134,10 +294,19 @@ public class LeanbackImeService extends KeyMapperImeService {
                     if (keyCode == LeanbackKeyboardView.ASCII_PERIOD) {
                         mEnterSpaceBeforeCommitting = true;
                     }
+
+                    if (keyCode > 0 && LeanbackUtils.isWordBoundary((char) keyCode)) {
+                        learnFromCursor(connection);
+                    }
                     break;
                 case InputListener.ENTRY_TYPE_BACKSPACE:
                     clearSuggestionsDelayed();
-                    connection.deleteSurroundingText(1, 0);
+                    CharSequence backspaceSelected = connection.getSelectedText(0);
+                    if (backspaceSelected != null && backspaceSelected.length() > 0) {
+                        connection.commitText("", 1);
+                    } else {
+                        connection.deleteSurroundingText(1, 0);
+                    }
                     mEnterSpaceBeforeCommitting = false;
                     updateSuggestions = true;
                     break;
@@ -145,7 +314,14 @@ public class LeanbackImeService extends KeyMapperImeService {
                 case InputListener.ENTRY_TYPE_VOICE:
                     clearSuggestionsDelayed();
                     if (!mSuggestionsFactory.shouldSuggestionsAmend()) {
-                        connection.deleteSurroundingText(LeanbackUtils.getCharLengthBeforeCursor(connection), LeanbackUtils.getCharLengthAfterCursor(connection));
+                        // Only delete the current word being replaced -
+                        // getCharLengthBeforeCursor/AfterCursor return up
+                        // to 1000 characters around the cursor (i.e.
+                        // basically the whole field), which would wipe
+                        // out everything else typed, not just the word
+                        // this suggestion replaces.
+                        int[] wordBounds = LeanbackUtils.getCurrentWordBoundaryLengths(connection);
+                        connection.deleteSurroundingText(wordBounds[0], wordBounds[1]);
                     } else {
                         int location = LeanbackUtils.getAmpersandLocation(connection);
                         connection.setSelection(location, location);
@@ -154,7 +330,29 @@ public class LeanbackImeService extends KeyMapperImeService {
 
                     connection.commitText(text, 1);
                     mEnterSpaceBeforeCommitting = true;
+
+                    if (LeanKeyPreferences.instance(this).isLearnKeyboardEnabled()
+                            && !LeanbackUtils.isPasswordField(getCurrentInputEditorInfo())) {
+                        learnPhrase(text.toString());
+                    }
+
+                    // Picking a suggestion or a voice result should not
+                    // also submit the field (that's what the fall-through
+                    // into ENTRY_TYPE_ACTION below used to do).
+                    updateSuggestions = true;
+                    break;
                 case InputListener.ENTRY_TYPE_ACTION:  // User presses Go, Send, Search etc
+                    // No boundary character (space/punctuation) gets
+                    // typed before this - without this, the last word
+                    // the user typed would never get learned. Only do it
+                    // if there's actually a fresh, un-learned word at the
+                    // cursor (mid-word) - if the user already typed a
+                    // trailing space/punctuation, that already learned
+                    // it, and doing it again here would double-count it.
+                    if (!LeanbackUtils.isAtWordBoundary(connection)) {
+                        learnFromCursor(connection);
+                    }
+
                     boolean result = sendDefaultEditorAction(true);
 
                     if (result) {
@@ -264,7 +462,7 @@ public class LeanbackImeService extends KeyMapperImeService {
             }
 
             if (mKeyboardController.areSuggestionsEnabled() && updateSuggestions) {
-                mKeyboardController.updateSuggestions(mSuggestionsFactory.getSuggestions());
+                refreshSuggestions(connection);
             }
         }
     }
@@ -453,7 +651,12 @@ public class LeanbackImeService extends KeyMapperImeService {
         sendBroadcast(new Intent(IME_OPEN));
         if (mKeyboardController.areSuggestionsEnabled()) {
             mSuggestionsFactory.createSuggestions();
-            mKeyboardController.updateSuggestions(mSuggestionsFactory.getSuggestions());
+            InputConnection startConnection = getCurrentInputConnection();
+            if (startConnection != null) {
+                refreshSuggestions(startConnection);
+            } else {
+                mKeyboardController.updateSuggestions(mSuggestionsFactory.getSuggestions());
+            }
 
             // NOTE: FileManager+ rename item fix: https://t.me/LeanKeyboard/931
             // NOTE: Code below deletes text that has selection.

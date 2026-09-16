@@ -106,8 +106,12 @@ rem 3. Build every requested flavor
 rem -------------------------------------------------------------
 set TASKS=
 for %%F in (%FLAVORS:,= %) do (
-    call :ToUpperFirst %%F FLAVOR_CAP
-    set TASKS=!TASKS! assemble!FLAVOR_CAP!Release
+    if /i "%%F"=="playstore" (
+        set TASKS=!TASKS! bundlePlaystoreRelease
+    ) else (
+        call :ToUpperFirst %%F FLAVOR_CAP
+        set TASKS=!TASKS! assemble!FLAVOR_CAP!Release
+    )
 )
 
 echo [build] Running: gradlew.bat!TASKS! -PappVersionName=%VERSION_NAME% -PappVersionCode=%VERSION_CODE%
@@ -118,19 +122,32 @@ if errorlevel 1 (
 )
 
 rem -------------------------------------------------------------
-rem 4. Collect the APKs
+rem 4. Collect the APKs/AABs
 rem -------------------------------------------------------------
 set OUT_DIR=%SCRIPT_DIR%releases\%VERSION_NAME%
 if not exist "%OUT_DIR%" mkdir "%OUT_DIR%"
 
 for %%F in (%FLAVORS:,= %) do (
-    for %%A in ("%SCRIPT_DIR%leankeykeyboard\build\outputs\apk\%%F\release\*.apk") do (
-        copy /y "%%A" "%OUT_DIR%\" >nul
+    if /i "%%F"=="playstore" (
+        for /d %%D in ("%SCRIPT_DIR%leankeykeyboard\build\outputs\bundle\playstore*") do (
+            for %%A in ("%%D\*.aab") do (
+                if exist "%%A" copy /y "%%A" "%OUT_DIR%\" >nul
+            )
+        )
+    ) else (
+        rem With two flavor dimensions the output folder is named after
+        rem the distribution+locale combo (e.g. originEn, originEnUk...),
+        rem not just "origin" - match every locale variant for it.
+        for /d %%D in ("%SCRIPT_DIR%leankeykeyboard\build\outputs\apk\%%F*") do (
+            for %%A in ("%%D\release\*.apk") do (
+                if exist "%%A" copy /y "%%A" "%OUT_DIR%\" >nul
+            )
+        )
     )
 )
 
 echo.
-echo [build] Done. APKs copied to: %OUT_DIR%
+echo [build] Done. Files copied to: %OUT_DIR%
 dir /b "%OUT_DIR%"
 exit /b 0
 

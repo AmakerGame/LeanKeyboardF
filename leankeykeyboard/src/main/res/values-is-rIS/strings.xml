@@ -61,6 +61,14 @@
     <string name="change_theme">Breyta þema</string>
     <string name="enable_suggestions">Virkja tillögur</string>
     <string name="enable_suggestions_desc">Virkja röð tillagna</string>
+    <string name="learn_keyboard">Lyklaborð sem lærir</string>
+    <string name="learn_keyboard_desc">Lyklaborðið man orð og setningar sem þú skrifar og stingur upp á þeim</string>
+    <string name="clear_learned_words">Hreinsa</string>
+    <string name="clear_learned_words_message">Tillögur hreinsaðar</string>
+    <string name="interface_settings">Viðmót</string>
+    <string name="interface_settings_desc">Stillingar fyrir fljótandi lyklaborð og þema</string>
+    <string name="suggestions_settings">Tillögur</string>
+    <string name="suggestions_settings_desc">Stillingar fyrir lyklaborð sem lærir og tillögur</string>
     <string name="show_launcher_icon">Sýna táknmynd</string>
     <string name="show_launcher_icon_desc">Sýna ræsitákn</string>
     <string name="enable_cyclic_navigation">Hringlaga flakk</string>
@@ -68,9 +76,10 @@
     <string name="clipboard_buffer">Klippiborðsminni</string>
     <string name="clipboard_buffer_desc">Nýleg atriði afrituð eða klippt með þessu lyklaborði</string>
     <string name="clear_clipboard_buffer">Hreinsa</string>
+    <string name="clear_clipboard_buffer_message">Klippiborð hreinsað</string>
     <!--  END: autotranslated strings  -->
-    <string name="about_original">Original program</string>
-    <string name="about_this_program">This program</string>
+    <string name="about_original">GitHub LeanKeyboard</string>
+    <string name="about_this_program">GitHub LeanKeyboardF</string>
     <string name="settings">Settings</string>
     <string name="settings_desc">Additional settings</string>
     <string name="physical_keyboard_mode">Physical keyboard mode</string>

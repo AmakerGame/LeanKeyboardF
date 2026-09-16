@@ -19,6 +19,7 @@ LeanKeyboardF aims to extend the original project with additional tools for keyb
 - **Author / Maintainer**: [AmakerGame](https://github.com/AmakerGame) (Edytor-Studio Core)
 - **Base project**: [yuliskov/LeanKeyboard](https://github.com/yuliskov/LeanKeyboard)
 - **This project**: [AmakerGame/LeanKeyboardF](https://github.com/AmakerGame/LeanKeyboardF/tree/master)
+- **XDA Forums thread**: [xdaforums.com/t/leankeyboardf.4799086](https://xdaforums.com/t/leankeyboardf.4799086/)
 
 ---
 
@@ -44,6 +45,9 @@ LeanKeyboardF aims to extend the original project with additional tools for keyb
 - Portuguese (Portugal) language: https://github.com/yuliskov/LeanKeyboard/issues/80
 - New keyboard themes: Light, System (follows device theme), and Dynamic Color (Material You, Android 12+)
 - Clipboard action row (Select All, Copy, Cut, Paste, Clear) next to the keyboard, with icon buttons
+- "Buffer" clipboard history key - shows recently copied/cut items to pick from
+- Learn Keyboard: learns words and word-pairs you type and suggests them, ranked by how often you use them - idea by [selivanoff](https://4pda.to/forum/index.php?showuser=1729354)
+- ABC layout for all languages supported in LeanKeyboardF
 
 ---
 

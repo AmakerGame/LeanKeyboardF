@@ -64,6 +64,14 @@
     <string name="change_theme">Thema wijzigen</string>
     <string name="enable_suggestions">Suggesties weergeven</string>
     <string name="enable_suggestions_desc">Toon een rij met suggesties boven het toetsenbord</string>
+    <string name="learn_keyboard">Lerend toetsenbord</string>
+    <string name="learn_keyboard_desc">Het toetsenbord onthoudt getypte woorden en zinnen en stelt ze voor</string>
+    <string name="clear_learned_words">Wissen</string>
+    <string name="clear_learned_words_message">Suggesties gewist</string>
+    <string name="interface_settings">Interface</string>
+    <string name="interface_settings_desc">Instellingen voor zwevend toetsenbord en thema</string>
+    <string name="suggestions_settings">Suggesties</string>
+    <string name="suggestions_settings_desc">Instellingen voor lerend toetsenbord en suggesties</string>
     <string name="show_launcher_icon">Pictogram weergeven</string>
     <string name="show_launcher_icon_desc">Toon het app-pictogram op de lijst met alle apps</string>
     <string name="enable_cyclic_navigation">Сyclisch navigeren</string>
@@ -71,8 +79,9 @@
     <string name="clipboard_buffer">Klembordbuffer</string>
     <string name="clipboard_buffer_desc">Recente items gekopieerd of geknipt met dit toetsenbord</string>
     <string name="clear_clipboard_buffer">Wissen</string>
-    <string name="about_original">Original program</string>
-    <string name="about_this_program">This program</string>
+    <string name="clear_clipboard_buffer_message">Klembord geleegd</string>
+    <string name="about_original">GitHub LeanKeyboard</string>
+    <string name="about_this_program">GitHub LeanKeyboardF</string>
     <string name="settings">Settings</string>
     <string name="settings_desc">Additional settings</string>
     <string name="physical_keyboard_mode">Physical keyboard mode</string>

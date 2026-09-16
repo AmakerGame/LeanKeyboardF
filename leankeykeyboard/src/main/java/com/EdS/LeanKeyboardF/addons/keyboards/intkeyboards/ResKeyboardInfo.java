@@ -16,6 +16,7 @@ public class ResKeyboardInfo implements KeyboardInfo {
     private String mLangCode;
     private String mLangName;
     private boolean mIsAzerty;
+    private boolean mIsAbc;
 
     public static List<KeyboardInfo> getAllKeyboardInfos(Context ctx) {
         List<KeyboardInfo> result = new ArrayList<>();
@@ -25,10 +26,12 @@ public class ResKeyboardInfo implements KeyboardInfo {
             final String langName = pairs[0];
             final String langCode = pairs[1];
             final boolean isAzerty = pairs.length >= 3 && "azerty".equals(pairs[2]);
+            final boolean isAbc = pairs.length >= 3 && "abc".equals(pairs[2]);
             KeyboardInfo info = new ResKeyboardInfo();
             info.setLangName(langName);
             info.setLangCode(langCode);
             info.setIsAzerty(isAzerty);
+            info.setIsAbc(isAbc);
             // sync with prefs
             syncWithPrefs(ctx, info);
             result.add(info);
@@ -103,9 +106,22 @@ public class ResKeyboardInfo implements KeyboardInfo {
         mIsAzerty = isAzerty;
     }
 
+    @Override
+    public boolean isAbc() {
+        return mIsAbc;
+    }
+
+    @Override
+    public void setIsAbc(boolean isAbc) {
+        mIsAbc = isAbc;
+    }
+
     @NonNull
     @Override
     public String toString() {
+        // NOTE: kept in the original format (without IsAbc) on purpose - this string is used
+        // as the SharedPreferences key for the "enabled" flag, so changing it here would reset
+        // the enabled/disabled state that users already saved for existing keyboards.
         return String.format("{Name: %s, Code: %s, IsAzerty: %b}", mLangName, mLangCode, mIsAzerty);
     }
 }
